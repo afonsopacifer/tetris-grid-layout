@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -102,10 +102,10 @@ var moveToLeft = function moveToLeft(element) {
   var currentColumnStart = parseInt(window.getComputedStyle(element).gridColumnStart);
   var currentColumnEnd = parseInt(window.getComputedStyle(element).gridColumnEnd);
 
-  if (currentColumnStart >= 1) {
-    element.style.gridColumnStart = currentColumnStart - 1;
-    element.style.gridColumnEnd = currentColumnEnd - 1;
-  }
+  //if (currentColumnStart >= 1) {
+  element.style.gridColumnStart = currentColumnStart - 1;
+  element.style.gridColumnEnd = currentColumnEnd - 1;
+  //}
 };
 
 exports.default = moveToLeft;
@@ -122,57 +122,66 @@ Object.defineProperty(exports, "__esModule", {
 });
 var moveToRight = function moveToRight(element) {
 
+  // const leftSquare = part.left;
+  // const topSquare = part.top;
+  // const rightSquare = part.right;
+  // const bottomSquare = part.bottom;
+
   var currentColumnStart = parseInt(window.getComputedStyle(element).gridColumnStart);
   var currentColumnEnd = parseInt(window.getComputedStyle(element).gridColumnEnd);
 
-  if (currentColumnStart < 10) {
-    element.style.gridColumnStart = currentColumnStart + 1;
-    element.style.gridColumnEnd = currentColumnEnd + 1;
-  }
+  // if (currentColumnStart < 10) {
+  element.style.gridColumnStart = currentColumnStart + 1;
+  element.style.gridColumnEnd = currentColumnEnd + 1;
+  // }
 };
 
 exports.default = moveToRight;
 
 /***/ }),
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _moveToRight = __webpack_require__(2);
+var _tPart = __webpack_require__(9);
 
-var _moveToRight2 = _interopRequireDefault(_moveToRight);
+var _tPart2 = _interopRequireDefault(_tPart);
 
-var _moveToLeft = __webpack_require__(1);
+var _movePartToBottom = __webpack_require__(6);
 
-var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
+var _movePartToBottom2 = _interopRequireDefault(_movePartToBottom);
 
-var _moveToBottom = __webpack_require__(0);
+var _movePartToRight = __webpack_require__(7);
 
-var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
+var _movePartToRight2 = _interopRequireDefault(_movePartToRight);
 
-var _newElement = __webpack_require__(5);
+var _movePartToLeft = __webpack_require__(8);
 
-var _newElement2 = _interopRequireDefault(_newElement);
+var _movePartToLeft2 = _interopRequireDefault(_movePartToLeft);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var canvas = document.getElementById('canvas');
 var right = document.getElementById('right');
 var left = document.getElementById('left');
 
 var tetrisInit = function tetrisInit() {
 
-  var canvas = document.getElementById('canvas');
-  var element = (0, _newElement2.default)();
+  var part = (0, _tPart2.default)();
 
-  canvas.appendChild(element);
+  canvas.appendChild(part.left);
+  canvas.appendChild(part.top);
+  canvas.appendChild(part.bottom);
+  canvas.appendChild(part.right);
 
   var handlerToRight = function handlerToRight() {
-    return (0, _moveToRight2.default)(element);
+    return (0, _movePartToRight2.default)(part);
   };
   var handlerToLeft = function handlerToLeft() {
-    return (0, _moveToLeft2.default)(element);
+    return (0, _movePartToLeft2.default)(part);
   };
 
   right.addEventListener('click', handlerToRight);
@@ -180,14 +189,13 @@ var tetrisInit = function tetrisInit() {
 
   var down = setInterval(function () {
 
-    var currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
+    var currentRowStart = parseInt(window.getComputedStyle(part.bottom).gridRowStart);
     var shouldMoveToBottom = currentRowStart < 20;
 
     if (shouldMoveToBottom) {
 
-      (0, _moveToBottom2.default)(element);
+      (0, _movePartToBottom2.default)(part);
     } else {
-
       // Clear this element
       right.removeEventListener('click', handlerToRight);
       left.removeEventListener('click', handlerToLeft);
@@ -201,50 +209,7 @@ var tetrisInit = function tetrisInit() {
 
 tetrisInit();
 
-// setInterval(() => goToBottom(square), 1000);
-
-
-// const square1 = document.getElementById('square1');
-//
-//
-// // addPostion(square1);
-//
-// let allPositionOnTheBottom = [];
-//
-// const savePositionOnTheBottom = (element) => {
-//   const cStart = parseInt(window.getComputedStyle(element).gridColumnStart);
-//   const cEnd = parseInt(window.getComputedStyle(element).gridColumnEnd);
-//   const rStart = parseInt(window.getComputedStyle(element).gridRowStart);
-//   const rEnd = parseInt(window.getComputedStyle(element).gridRowEnd);
-//
-//   allPositionOnTheBottom.push([cStart, cEnd, rStart, rEnd]);
-// }
-//
-// right.addEventListener('click', () => {
-//
-//   const x = estaOcupado(
-//     parseInt(window.getComputedStyle(square).gridColumnStart) + 1,
-//     parseInt(window.getComputedStyle(square).gridColumnEnd) + 1,
-//     parseInt(window.getComputedStyle(square).gridRowStart),
-//     parseInt(window.getComputedStyle(square).gridRowEnd)
-//   );
-//
-//   if(x) {
-//     moveToLeft(square)
-//   }
-//
-// })
-//
-// const estaOcupado = (cStart, cEnd, rStart, rEnd) => {
-//  if(allPos[0][0] == cStart && allPos[0][1] == cEnd && allPos[0][2] == rStart && allPo[0][3] == rEnd) {
-//   return false;
-//  } else {
-//   return true;
-//  }
-// }
-
 /***/ }),
-/* 4 */,
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -254,21 +219,169 @@ tetrisInit();
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var newElement = function newElement() {
+var newSquare = function newSquare(obj) {
 
-  var element = document.createElement('div');
+  var squareElement = document.createElement('div');
 
-  element.style.gridRowStart = 1;
-  element.style.gridRowEnd = 1;
-  element.style.gridColumnStart = 1;
-  element.style.gridColumnEnd = 1;
+  squareElement.style.gridRowStart = obj.gridRowStart;
+  squareElement.style.gridRowEnd = obj.gridRowEnd;
+  squareElement.style.gridColumnStart = obj.gridColumnStart;
+  squareElement.style.gridColumnEnd = obj.gridColumnEnd;
 
-  element.classList.add('red');
+  squareElement.classList.add('red');
 
-  return element;
+  return squareElement;
 };
 
-exports.default = newElement;
+exports.default = newSquare;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _moveToBottom = __webpack_require__(0);
+
+var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var movePartToBottom = function movePartToBottom(part) {
+
+  (0, _moveToBottom2.default)(part.left);
+  (0, _moveToBottom2.default)(part.top);
+  (0, _moveToBottom2.default)(part.bottom);
+  (0, _moveToBottom2.default)(part.right);
+};
+
+exports.default = movePartToBottom;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _moveToRight = __webpack_require__(2);
+
+var _moveToRight2 = _interopRequireDefault(_moveToRight);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var movePartToRight = function movePartToRight(part) {
+
+  var currentColumnStart = parseInt(window.getComputedStyle(part.right).gridColumnStart);
+
+  if (currentColumnStart < 10) {
+
+    (0, _moveToRight2.default)(part.left);
+    (0, _moveToRight2.default)(part.top);
+    (0, _moveToRight2.default)(part.bottom);
+    (0, _moveToRight2.default)(part.right);
+  }
+};
+
+exports.default = movePartToRight;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _moveToLeft = __webpack_require__(1);
+
+var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var movePartToLeft = function movePartToLeft(part) {
+
+  var currentColumnStart = parseInt(window.getComputedStyle(part.left).gridColumnStart);
+
+  if (currentColumnStart >= 2) {
+
+    (0, _moveToLeft2.default)(part.left);
+    (0, _moveToLeft2.default)(part.top);
+    (0, _moveToLeft2.default)(part.bottom);
+    (0, _moveToLeft2.default)(part.right);
+  }
+};
+
+exports.default = movePartToLeft;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _newSquare = __webpack_require__(5);
+
+var _newSquare2 = _interopRequireDefault(_newSquare);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var tPart = function tPart() {
+
+  var square1 = (0, _newSquare2.default)({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 5,
+    gridColumnEnd: 6
+  });
+
+  var square2 = (0, _newSquare2.default)({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 6,
+    gridColumnEnd: 7
+  });
+
+  var square3 = (0, _newSquare2.default)({
+    gridRowStart: 2,
+    gridRowEnd: 3,
+    gridColumnStart: 6,
+    gridColumnEnd: 7
+  });
+
+  var square4 = (0, _newSquare2.default)({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 7,
+    gridColumnEnd: 8
+  });
+
+  return {
+    left: square1,
+    top: square2,
+    bottom: square3,
+    right: square4
+  };
+};
+
+exports.default = tPart;
 
 /***/ })
 /******/ ]);

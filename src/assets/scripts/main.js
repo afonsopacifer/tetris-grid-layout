@@ -1,35 +1,37 @@
-import moveToRight  from './moveToRight';
-import moveToLeft   from './moveToLeft';
-import moveToBottom from './moveToBottom';
-import newElement   from './newElement';
+import tPart from './tPart';
+import movePartToBottom from './movePartToBottom';
+import movePartToRight from './movePartToRight';
+import movePartToLeft from './movePartToLeft';
 
-const right  = document.getElementById('right');
-const left   = document.getElementById('left');
+const canvas = document.getElementById('canvas');
+const right = document.getElementById('right');
+const left = document.getElementById('left');
 
 const tetrisInit = () => {
 
-  const canvas = document.getElementById('canvas');
-  const element = newElement();
+  const part = tPart();
 
-  canvas.appendChild(element);
+  canvas.appendChild(part.left);
+  canvas.appendChild(part.top);
+  canvas.appendChild(part.bottom);
+  canvas.appendChild(part.right);
 
-  const handlerToRight = () => moveToRight(element);
-  const handlerToLeft = () => moveToLeft(element);
+  const handlerToRight = () => movePartToRight(part);
+  const handlerToLeft = () => movePartToLeft(part);
 
   right.addEventListener('click', handlerToRight);
   left.addEventListener('click', handlerToLeft);
 
   const down = setInterval(() => {
 
-    const currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
+    const currentRowStart = parseInt(window.getComputedStyle(part.bottom).gridRowStart);
     const shouldMoveToBottom = currentRowStart < 20;
 
     if (shouldMoveToBottom) {
 
-      moveToBottom(element);
+      movePartToBottom(part);
 
     } else {
-
       // Clear this element
       right.removeEventListener('click', handlerToRight);
       left.removeEventListener('click', handlerToLeft);
@@ -37,7 +39,6 @@ const tetrisInit = () => {
 
       // Recursion ;)
       tetrisInit();
-
     }
 
   }, 1000);
