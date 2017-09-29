@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,56 +73,152 @@
 "use strict";
 
 
-var _moveToRight = __webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var moveToBottom = function moveToBottom(element) {
+
+  var currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
+  var currentRowEnd = parseInt(window.getComputedStyle(element).gridRowEnd);
+
+  element.style.gridRowStart = currentRowStart + 1;
+  element.style.gridRowEnd = currentRowEnd + 1;
+};
+
+exports.default = moveToBottom;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var moveToLeft = function moveToLeft(element) {
+
+  var currentColumnStart = parseInt(window.getComputedStyle(element).gridColumnStart);
+  var currentColumnEnd = parseInt(window.getComputedStyle(element).gridColumnEnd);
+
+  if (currentColumnStart >= 1) {
+    element.style.gridColumnStart = currentColumnStart - 1;
+    element.style.gridColumnEnd = currentColumnEnd - 1;
+  }
+};
+
+exports.default = moveToLeft;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var moveToRight = function moveToRight(element) {
+
+  var currentColumnStart = parseInt(window.getComputedStyle(element).gridColumnStart);
+  var currentColumnEnd = parseInt(window.getComputedStyle(element).gridColumnEnd);
+
+  if (currentColumnStart < 10) {
+    element.style.gridColumnStart = currentColumnStart + 1;
+    element.style.gridColumnEnd = currentColumnEnd + 1;
+  }
+};
+
+exports.default = moveToRight;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _moveToRight = __webpack_require__(2);
 
 var _moveToRight2 = _interopRequireDefault(_moveToRight);
 
-var _moveToLeft = __webpack_require__(2);
+var _moveToLeft = __webpack_require__(1);
 
 var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
 
-var _moveToBottom = __webpack_require__(3);
+var _moveToBottom = __webpack_require__(0);
 
 var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _newElement = __webpack_require__(5);
 
-var square = document.getElementById('square');
+var _newElement2 = _interopRequireDefault(_newElement);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var right = document.getElementById('right');
 var left = document.getElementById('left');
-var bottom = document.getElementById('bottom');
 
-right.addEventListener('click', function () {
-  return (0, _moveToRight2.default)(square);
-});
-left.addEventListener('click', function () {
-  return (0, _moveToLeft2.default)(square);
-});
-bottom.addEventListener('click', function () {
-  return (0, _moveToBottom2.default)(square);
-});
+var tetrisInit = function tetrisInit() {
+
+  var canvas = document.getElementById('canvas');
+  var element = (0, _newElement2.default)();
+
+  canvas.appendChild(element);
+
+  var handlerToRight = function handlerToRight() {
+    return (0, _moveToRight2.default)(element);
+  };
+  var handlerToLeft = function handlerToLeft() {
+    return (0, _moveToLeft2.default)(element);
+  };
+
+  right.addEventListener('click', handlerToRight);
+  left.addEventListener('click', handlerToLeft);
+
+  var down = setInterval(function () {
+
+    var currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
+    var shouldMoveToBottom = currentRowStart < 20;
+
+    if (shouldMoveToBottom) {
+
+      (0, _moveToBottom2.default)(element);
+    } else {
+
+      // Clear this element
+      right.removeEventListener('click', handlerToRight);
+      left.removeEventListener('click', handlerToLeft);
+      clearInterval(down);
+
+      // Recursion ;)
+      tetrisInit();
+    }
+  }, 1000);
+};
+
+tetrisInit();
+
+// setInterval(() => goToBottom(square), 1000);
+
 
 // const square1 = document.getElementById('square1');
 //
-// const right = document.getElementById('right');
-// const left = document.getElementById('left');
-// const bottom = document.getElementById('bottom');
 //
-// let allPos = [];
+// // addPostion(square1);
 //
-// const addPostion = (element) => {
+// let allPositionOnTheBottom = [];
+//
+// const savePositionOnTheBottom = (element) => {
 //   const cStart = parseInt(window.getComputedStyle(element).gridColumnStart);
 //   const cEnd = parseInt(window.getComputedStyle(element).gridColumnEnd);
 //   const rStart = parseInt(window.getComputedStyle(element).gridRowStart);
 //   const rEnd = parseInt(window.getComputedStyle(element).gridRowEnd);
 //
-//   allPos.push([cStart, cEnd, rStart, rEnd]);
+//   allPositionOnTheBottom.push([cStart, cEnd, rStart, rEnd]);
 // }
-//
-// // addPostion(square1);
-//
-//
 //
 // right.addEventListener('click', () => {
 //
@@ -146,23 +242,10 @@ bottom.addEventListener('click', function () {
 //   return true;
 //  }
 // }
-//
-// const moveToLeft = (element) => {
-//   element.style.gridColumnStart = parseInt(window.getComputedStyle(element).gridColumnStart) + 1;
-//   element.style.gridColumnEnd = parseInt(window.getComputedStyle(element).gridColumnEnd) + 1;
-// }
-//
-//
-// const moveToBottom = (element) => {
-//   element.style.gridColumnStart = parseInt(window.getComputedStyle(element).gridRowStart) - 1;
-//   element.style.gridColumnEnd = parseInt(window.getComputedStyle(element).gridRowEnd) - 1;
-// }
-//
-// left.addEventListener('click', () => moveToLeft(square))
-// bottom.addEventListener('click', () => moveToBottom(square))
 
 /***/ }),
-/* 1 */
+/* 4 */,
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -171,55 +254,21 @@ bottom.addEventListener('click', function () {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var moveToRight = function moveToRight(element) {
-  var currentColumnStart = parseInt(window.getComputedStyle(element).gridColumnStart);
-  var currentColumnEnd = parseInt(window.getComputedStyle(element).gridColumnEnd);
+var newElement = function newElement() {
 
-  element.style.gridColumnStart = currentColumnStart + 1;
-  element.style.gridColumnEnd = currentColumnEnd + 1;
+  var element = document.createElement('div');
+
+  element.style.gridRowStart = 1;
+  element.style.gridRowEnd = 1;
+  element.style.gridColumnStart = 1;
+  element.style.gridColumnEnd = 1;
+
+  element.classList.add('red');
+
+  return element;
 };
 
-exports.default = moveToRight;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var moveToLeft = function moveToLeft(element) {
-  var currentColumnStart = parseInt(window.getComputedStyle(element).gridColumnStart);
-  var currentColumnEnd = parseInt(window.getComputedStyle(element).gridColumnEnd);
-
-  element.style.gridColumnStart = currentColumnStart - 1;
-  element.style.gridColumnEnd = currentColumnEnd - 1;
-};
-
-exports.default = moveToLeft;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var moveToBottom = function moveToBottom(element) {
-  var currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
-  var currentRowEnd = parseInt(window.getComputedStyle(element).gridRowEnd);
-
-  element.style.gridRowStart = currentRowStart + 1;
-  element.style.gridRowEnd = currentRowEnd + 1;
-};
-
-exports.default = moveToBottom;
+exports.default = newElement;
 
 /***/ })
 /******/ ]);
