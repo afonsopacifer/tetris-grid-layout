@@ -1,8 +1,19 @@
+// ---------------------------------------
+// Import all parts profiles
+// ---------------------------------------
+
 import tPart from './tPart';
+
+// ---------------------------------------
+// Import all helpers
+// ---------------------------------------
+
 import movePartToBottom from './movePartToBottom';
 import movePartToRight from './movePartToRight';
 import movePartToLeft from './movePartToLeft';
-import getSquarePosition from './getSquarePosition'
+import getSquarePosition from './getSquarePosition';
+import registerAllSquareEndPositions from './registerAllSquareEndPositions';
+import getComputedStyleLine from './getComputedStyleLine';
 
 // ---------------------------------------
 // Get elements
@@ -14,27 +25,10 @@ const left = document.getElementById('left');
 
 
 // ---------------------------------------
-// State of all stoped square
+// State of all stopped square
 // ---------------------------------------
 
 let allSquareEndPosition = [];
-
-// ---------------------------------------
-// Register the position of all stoped square
-// ---------------------------------------
-
-const registerEndPosition = (part) => {
-
-  const leftSquareEndPosition = getSquarePosition(part.left)
-  const topSquareEndPosition = getSquarePosition(part.top)
-  const bottomSquareEndPosition = getSquarePosition(part.bottom)
-  const rightSquareEndPosition = getSquarePosition(part.right)
-
-  allSquareEndPosition.push(leftSquareEndPosition);
-  allSquareEndPosition.push(topSquareEndPosition);
-  allSquareEndPosition.push(bottomSquareEndPosition);
-  allSquareEndPosition.push(rightSquareEndPosition);
-}
 
 // ---------------------------------------
 // The tetris game
@@ -43,7 +37,7 @@ const registerEndPosition = (part) => {
 const tetrisInit = () => {
 
   // ---------------------------------------
-  // Create new game element
+  // Create new game part
   // ---------------------------------------
 
   const part = tPart();
@@ -64,86 +58,125 @@ const tetrisInit = () => {
   left.addEventListener('click', handlerToLeft);
 
   // ---------------------------------------
-  // Start the game
+  // Start game
   // ---------------------------------------
 
   const down = setInterval(() => {
 
+    // ---------------------------------------
+    // Check collision with all stopped square
+    // todo: Refactor and implement left & right collisions
+    // ---------------------------------------
 
-    // Check collision with stoped square
-    // -----------------------
+    let noCollidedWithAnotherSquare = true;
 
-    let collidedWithAnotherSquare = true;
+    // --------------
+    // Get all part square positions for test
+    // --------------
 
-    const bottomPartCurrentRowEnd = parseInt(window.getComputedStyle(part.bottom).gridRowEnd);
-    const bottomPartcurrentColumnStart = parseInt(window.getComputedStyle(part.bottom).gridColumnStart);
+    const bottomPartCurrentRowEnd = getComputedStyleLine(part.bottom, 'gridRowEnd');
+    const bottomPartCurrentColumnStart = getComputedStyleLine(part.bottom, 'gridColumnStart');
 
-    const leftPartCurrentRowEnd = parseInt(window.getComputedStyle(part.left).gridRowEnd);
-    const leftPartcurrentColumnStart = parseInt(window.getComputedStyle(part.left).gridColumnStart);
+    const leftPartCurrentRowEnd = getComputedStyleLine(part.left, 'gridRowEnd');
+    const leftPartCurrentColumnStart = getComputedStyleLine(part.left, 'gridColumnStart');
 
-    const rightPartCurrentRowEnd = parseInt(window.getComputedStyle(part.right).gridRowEnd);
-    const rightPartcurrentColumnStart = parseInt(window.getComputedStyle(part.right).gridColumnStart);
+    const rightPartCurrentRowEnd = getComputedStyleLine(part.right, 'gridRowEnd');
+    const rightPartCurrentColumnStart = getComputedStyleLine(part.right, 'gridColumnStart');
 
-    const topPartCurrentRowEnd = parseInt(window.getComputedStyle(part.top).gridRowEnd);
-    const topPartcurrentColumnStart = parseInt(window.getComputedStyle(part.top).gridColumnStart);
+    const topPartCurrentRowEnd = getComputedStyleLine(part.top, 'gridRowEnd');
+    const topPartCurrentColumnStart = getComputedStyleLine(part.top, 'gridColumnStart');
 
-    allSquareEndPosition.forEach((stopedSquare) => {
+    // --------------
+    // Test collision with all stopped square
+    // --------------
 
-      const x = bottomPartCurrentRowEnd == stopedSquare.rowStart;
-      const y = bottomPartcurrentColumnStart == stopedSquare.columnStart;
+    allSquareEndPosition.forEach((stoppedSquare) => {
 
-      if (x && y) {
-        collidedWithAnotherSquare = false;
-      }
+      // --------------
+      // Test bottom square
+      // --------------
 
-      const a = leftPartCurrentRowEnd == stopedSquare.rowStart;
-      const b = leftPartcurrentColumnStart == stopedSquare.columnStart;
+      const bottomSquareCollided = bottomPartCurrentRowEnd == stoppedSquare.rowStart && bottomPartCurrentColumnStart == stoppedSquare.columnStart;
 
-      if (a && b) {
-        collidedWithAnotherSquare = false;
-      }
+      if (bottomSquareCollided) noCollidedWithAnotherSquare = false;
 
-      const m = rightPartCurrentRowEnd == stopedSquare.rowStart;
-      const n = rightPartcurrentColumnStart == stopedSquare.columnStart;
+      // --------------
+      // Test left square
+      // --------------
 
-      if (m && n) {
-        collidedWithAnotherSquare = false;
-      }
+      const leftSquareCollided = leftPartCurrentRowEnd == stoppedSquare.rowStart && leftPartCurrentColumnStart == stoppedSquare.columnStart;
 
-      const k = topPartCurrentRowEnd == stopedSquare.rowStart;
-      const l = topPartcurrentColumnStart == stopedSquare.columnStart;
+      if (leftSquareCollided) noCollidedWithAnotherSquare = false;
 
-      if (k && l) {
-        collidedWithAnotherSquare = false;
-      }
+      // --------------
+      // Test right square
+      // --------------
+
+      const rightSquareCollided = rightPartCurrentRowEnd == stoppedSquare.rowStart && rightPartCurrentColumnStart == stoppedSquare.columnStart;
+
+      if (rightSquareCollided) noCollidedWithAnotherSquare = false;
+
+      // --------------
+      // Test top square
+      // --------------
+
+      const topSquareCollided = topPartCurrentRowEnd == stoppedSquare.rowStart && topPartCurrentColumnStart == stoppedSquare.columnStart;
+
+      if (topSquareCollided) noCollidedWithAnotherSquare = false;
 
     })
 
+    // ---------------------------------------
     // Check collision with game bottom
-    // -----------------------
-    const bottomSquare = part.bottom;
-    const currentRowEnd = parseInt(window.getComputedStyle(bottomSquare).gridRowEnd);
-    const reachedTheBottom = currentRowEnd < 21;
+    // ---------------------------------------
 
+    const currentRowEnd = getComputedStyleLine(part.bottom, 'gridRowEnd');
+    const noReachedTheBottom = currentRowEnd < 21;
+
+    // ---------------------------------------
     // Game engine
-    // -----------------------
-    if (reachedTheBottom && collidedWithAnotherSquare) {
+    // ---------------------------------------
+
+    const shouldKeepDown = noReachedTheBottom && noCollidedWithAnotherSquare;
+
+    if (shouldKeepDown) {
+
+      // --------------
+      // Continues with the round
+      // --------------
 
       movePartToBottom(part);
 
     } else {
-      // Clear this element
+
+      // --------------
+      // Remove handlers for this part
+      // --------------
+
       right.removeEventListener('click', handlerToRight);
       left.removeEventListener('click', handlerToLeft);
+
+      // --------------
+      // Finish this round
+      // --------------
+
       clearInterval(down);
 
-      registerEndPosition(part)
+      // --------------
+      // Save position of all square
+      // --------------
 
-      // Recursion ;)
+      registerAllSquareEndPositions(part, allSquareEndPosition)
+
+      // --------------
+      // Start new round
+      // --------------
+
       tetrisInit();
+
     }
 
-  }, 300);
+  }, 300); // Round time
 
 }
 

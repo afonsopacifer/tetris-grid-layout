@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -76,8 +76,31 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var getSquarePosition = function getSquarePosition(square) {
 
-var _moveToBottom = __webpack_require__(5);
+  var columnStartValue = parseInt(window.getComputedStyle(square).gridColumnStart);
+  var rowStartValue = parseInt(window.getComputedStyle(square).gridRowStart);
+
+  return {
+    columnStart: columnStartValue,
+    rowStart: rowStartValue
+  };
+};
+
+exports.default = getSquarePosition;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _moveToBottom = __webpack_require__(6);
 
 var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
 
@@ -94,7 +117,7 @@ var movePartToBottom = function movePartToBottom(part) {
 exports.default = movePartToBottom;
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -104,7 +127,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToLeft = __webpack_require__(6);
+var _moveToLeft = __webpack_require__(7);
 
 var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
 
@@ -126,7 +149,7 @@ var movePartToLeft = function movePartToLeft(part) {
 exports.default = movePartToLeft;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -136,7 +159,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToRight = __webpack_require__(7);
+var _moveToRight = __webpack_require__(8);
 
 var _moveToRight2 = _interopRequireDefault(_moveToRight);
 
@@ -158,7 +181,7 @@ var movePartToRight = function movePartToRight(part) {
 exports.default = movePartToRight;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -168,7 +191,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _newSquare = __webpack_require__(8);
+var _newSquare = __webpack_require__(9);
 
 var _newSquare2 = _interopRequireDefault(_newSquare);
 
@@ -215,31 +238,39 @@ var tPart = function tPart() {
 exports.default = tPart;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _tPart = __webpack_require__(3);
+var _tPart = __webpack_require__(4);
 
 var _tPart2 = _interopRequireDefault(_tPart);
 
-var _movePartToBottom = __webpack_require__(0);
+var _movePartToBottom = __webpack_require__(1);
 
 var _movePartToBottom2 = _interopRequireDefault(_movePartToBottom);
 
-var _movePartToRight = __webpack_require__(2);
+var _movePartToRight = __webpack_require__(3);
 
 var _movePartToRight2 = _interopRequireDefault(_movePartToRight);
 
-var _movePartToLeft = __webpack_require__(1);
+var _movePartToLeft = __webpack_require__(2);
 
 var _movePartToLeft2 = _interopRequireDefault(_movePartToLeft);
 
-var _getSquarePosition = __webpack_require__(9);
+var _getSquarePosition = __webpack_require__(0);
 
 var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
+
+var _registerAllSquareEndPositions = __webpack_require__(10);
+
+var _registerAllSquareEndPositions2 = _interopRequireDefault(_registerAllSquareEndPositions);
+
+var _getComputedStyleLine = __webpack_require__(12);
+
+var _getComputedStyleLine2 = _interopRequireDefault(_getComputedStyleLine);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -247,32 +278,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Get elements
 // ---------------------------------------
 
-var canvas = document.getElementById('canvas');
+// ---------------------------------------
+// Import all helpers
+// ---------------------------------------
+
+var canvas = document.getElementById('canvas'); // ---------------------------------------
+// Import all parts profiles
+// ---------------------------------------
+
 var right = document.getElementById('right');
 var left = document.getElementById('left');
 
 // ---------------------------------------
-// State of all stoped square
+// State of all stopped square
 // ---------------------------------------
 
 var allSquareEndPosition = [];
-
-// ---------------------------------------
-// Register the position of all stoped square
-// ---------------------------------------
-
-var registerEndPosition = function registerEndPosition(part) {
-
-  var leftSquareEndPosition = (0, _getSquarePosition2.default)(part.left);
-  var topSquareEndPosition = (0, _getSquarePosition2.default)(part.top);
-  var bottomSquareEndPosition = (0, _getSquarePosition2.default)(part.bottom);
-  var rightSquareEndPosition = (0, _getSquarePosition2.default)(part.right);
-
-  allSquareEndPosition.push(leftSquareEndPosition);
-  allSquareEndPosition.push(topSquareEndPosition);
-  allSquareEndPosition.push(bottomSquareEndPosition);
-  allSquareEndPosition.push(rightSquareEndPosition);
-};
 
 // ---------------------------------------
 // The tetris game
@@ -281,7 +302,7 @@ var registerEndPosition = function registerEndPosition(part) {
 var tetrisInit = function tetrisInit() {
 
   // ---------------------------------------
-  // Create new game element
+  // Create new game part
   // ---------------------------------------
 
   var part = (0, _tPart2.default)();
@@ -306,88 +327,127 @@ var tetrisInit = function tetrisInit() {
   left.addEventListener('click', handlerToLeft);
 
   // ---------------------------------------
-  // Start the game
+  // Start game
   // ---------------------------------------
 
   var down = setInterval(function () {
 
-    // Check collision with stoped square
-    // -----------------------
+    // ---------------------------------------
+    // Check collision with all stopped square
+    // todo: Refactor and implement left & right collisions
+    // ---------------------------------------
 
-    var collidedWithAnotherSquare = true;
+    var noCollidedWithAnotherSquare = true;
 
-    var bottomPartCurrentRowEnd = parseInt(window.getComputedStyle(part.bottom).gridRowEnd);
-    var bottomPartcurrentColumnStart = parseInt(window.getComputedStyle(part.bottom).gridColumnStart);
+    // --------------
+    // Get all part square positions for test
+    // --------------
 
-    var leftPartCurrentRowEnd = parseInt(window.getComputedStyle(part.left).gridRowEnd);
-    var leftPartcurrentColumnStart = parseInt(window.getComputedStyle(part.left).gridColumnStart);
+    var bottomPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.bottom, 'gridRowEnd');
+    var bottomPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.bottom, 'gridColumnStart');
 
-    var rightPartCurrentRowEnd = parseInt(window.getComputedStyle(part.right).gridRowEnd);
-    var rightPartcurrentColumnStart = parseInt(window.getComputedStyle(part.right).gridColumnStart);
+    var leftPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.left, 'gridRowEnd');
+    var leftPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.left, 'gridColumnStart');
 
-    var topPartCurrentRowEnd = parseInt(window.getComputedStyle(part.top).gridRowEnd);
-    var topPartcurrentColumnStart = parseInt(window.getComputedStyle(part.top).gridColumnStart);
+    var rightPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.right, 'gridRowEnd');
+    var rightPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.right, 'gridColumnStart');
 
-    allSquareEndPosition.forEach(function (stopedSquare) {
+    var topPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.top, 'gridRowEnd');
+    var topPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.top, 'gridColumnStart');
 
-      var x = bottomPartCurrentRowEnd == stopedSquare.rowStart;
-      var y = bottomPartcurrentColumnStart == stopedSquare.columnStart;
+    // --------------
+    // Test collision with all stopped square
+    // --------------
 
-      if (x && y) {
-        collidedWithAnotherSquare = false;
-      }
+    allSquareEndPosition.forEach(function (stoppedSquare) {
 
-      var a = leftPartCurrentRowEnd == stopedSquare.rowStart;
-      var b = leftPartcurrentColumnStart == stopedSquare.columnStart;
+      // --------------
+      // Test bottom square
+      // --------------
 
-      if (a && b) {
-        collidedWithAnotherSquare = false;
-      }
+      var bottomSquareCollided = bottomPartCurrentRowEnd == stoppedSquare.rowStart && bottomPartCurrentColumnStart == stoppedSquare.columnStart;
 
-      var m = rightPartCurrentRowEnd == stopedSquare.rowStart;
-      var n = rightPartcurrentColumnStart == stopedSquare.columnStart;
+      if (bottomSquareCollided) noCollidedWithAnotherSquare = false;
 
-      if (m && n) {
-        collidedWithAnotherSquare = false;
-      }
+      // --------------
+      // Test left square
+      // --------------
 
-      var k = topPartCurrentRowEnd == stopedSquare.rowStart;
-      var l = topPartcurrentColumnStart == stopedSquare.columnStart;
+      var leftSquareCollided = leftPartCurrentRowEnd == stoppedSquare.rowStart && leftPartCurrentColumnStart == stoppedSquare.columnStart;
 
-      if (k && l) {
-        collidedWithAnotherSquare = false;
-      }
+      if (leftSquareCollided) noCollidedWithAnotherSquare = false;
+
+      // --------------
+      // Test right square
+      // --------------
+
+      var rightSquareCollided = rightPartCurrentRowEnd == stoppedSquare.rowStart && rightPartCurrentColumnStart == stoppedSquare.columnStart;
+
+      if (rightSquareCollided) noCollidedWithAnotherSquare = false;
+
+      // --------------
+      // Test top square
+      // --------------
+
+      var topSquareCollided = topPartCurrentRowEnd == stoppedSquare.rowStart && topPartCurrentColumnStart == stoppedSquare.columnStart;
+
+      if (topSquareCollided) noCollidedWithAnotherSquare = false;
     });
 
+    // ---------------------------------------
     // Check collision with game bottom
-    // -----------------------
-    var bottomSquare = part.bottom;
-    var currentRowEnd = parseInt(window.getComputedStyle(bottomSquare).gridRowEnd);
-    var reachedTheBottom = currentRowEnd < 21;
+    // ---------------------------------------
 
+    var currentRowEnd = (0, _getComputedStyleLine2.default)(part.bottom, 'gridRowEnd');
+    var noReachedTheBottom = currentRowEnd < 21;
+
+    // ---------------------------------------
     // Game engine
-    // -----------------------
-    if (reachedTheBottom && collidedWithAnotherSquare) {
+    // ---------------------------------------
+
+    var shouldKeepDown = noReachedTheBottom && noCollidedWithAnotherSquare;
+
+    if (shouldKeepDown) {
+
+      // --------------
+      // Continues with the round
+      // --------------
 
       (0, _movePartToBottom2.default)(part);
     } else {
-      // Clear this element
+
+      // --------------
+      // Remove handlers for this part
+      // --------------
+
       right.removeEventListener('click', handlerToRight);
       left.removeEventListener('click', handlerToLeft);
+
+      // --------------
+      // Finish this round
+      // --------------
+
       clearInterval(down);
 
-      registerEndPosition(part);
+      // --------------
+      // Save position of all square
+      // --------------
 
-      // Recursion ;)
+      (0, _registerAllSquareEndPositions2.default)(part, allSquareEndPosition);
+
+      // --------------
+      // Start new round
+      // --------------
+
       tetrisInit();
     }
-  }, 300);
+  }, 300); // Round time
 };
 
 tetrisInit();
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -408,7 +468,7 @@ var moveToBottom = function moveToBottom(element) {
 exports.default = moveToBottom;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -431,7 +491,7 @@ var moveToLeft = function moveToLeft(element) {
 exports.default = moveToLeft;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -459,7 +519,7 @@ var moveToRight = function moveToRight(element) {
 exports.default = moveToRight;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -485,7 +545,7 @@ var newSquare = function newSquare(obj) {
 exports.default = newSquare;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -494,18 +554,44 @@ exports.default = newSquare;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getSquarePosition = function getSquarePosition(square) {
 
-  var columnStartValue = parseInt(window.getComputedStyle(square).gridColumnStart);
-  var rowStartValue = parseInt(window.getComputedStyle(square).gridRowStart);
+var _getSquarePosition = __webpack_require__(0);
 
-  return {
-    columnStart: columnStartValue,
-    rowStart: rowStartValue
-  };
+var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var registerAllSquareEndPositions = function registerAllSquareEndPositions(part, squarePositionsList) {
+
+  var leftSquareEndPosition = (0, _getSquarePosition2.default)(part.left);
+  var topSquareEndPosition = (0, _getSquarePosition2.default)(part.top);
+  var bottomSquareEndPosition = (0, _getSquarePosition2.default)(part.bottom);
+  var rightSquareEndPosition = (0, _getSquarePosition2.default)(part.right);
+
+  squarePositionsList.push(leftSquareEndPosition);
+  squarePositionsList.push(topSquareEndPosition);
+  squarePositionsList.push(bottomSquareEndPosition);
+  squarePositionsList.push(rightSquareEndPosition);
 };
 
-exports.default = getSquarePosition;
+exports.default = registerAllSquareEndPositions;
+
+/***/ }),
+/* 11 */,
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getComputedStyleLine = function getComputedStyleLine(square, lineName) {
+  return parseInt(window.getComputedStyle(square)[lineName]);
+};
+
+exports.default = getComputedStyleLine;
 
 /***/ })
 /******/ ]);
