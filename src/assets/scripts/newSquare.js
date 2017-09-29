@@ -1,4 +1,4 @@
-const newSquare = (obj) => {
+const newSquare = (obj, colorClass) => {
 
   const squareElement = document.createElement('div');
 
@@ -7,7 +7,8 @@ const newSquare = (obj) => {
   squareElement.style.gridColumnStart = obj.gridColumnStart;
   squareElement.style.gridColumnEnd = obj.gridColumnEnd;
 
-  squareElement.classList.add('red');
+  squareElement.classList.add('part');
+  squareElement.classList.add(colorClass);
 
   return squareElement
 }

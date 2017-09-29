@@ -3,6 +3,12 @@
 // ---------------------------------------
 
 import tPart from './tPart';
+import iPart from './iPart';
+import jPart from './jPart';
+import lPart from './lPart';
+import oPart from './oPart';
+import sPart from './sPart';
+import zPart from './zPart';
 
 // ---------------------------------------
 // Import all helpers
@@ -23,7 +29,6 @@ const canvas = document.getElementById('canvas');
 const right = document.getElementById('right');
 const left = document.getElementById('left');
 
-
 // ---------------------------------------
 // State of all stopped square
 // ---------------------------------------
@@ -40,7 +45,7 @@ const tetrisInit = () => {
   // Create new game part
   // ---------------------------------------
 
-  const part = tPart();
+  const part = zPart();
 
   canvas.appendChild(part.left);
   canvas.appendChild(part.top);
