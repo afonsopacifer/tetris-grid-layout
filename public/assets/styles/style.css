@@ -1,0 +1,29 @@
+#canvas {
+  border: 1px solid #000;
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(20, 30px);
+  width: 100%;
+  max-width: 300px;
+}
+
+.red {
+  background: red;
+}
+
+.right {
+  /* Horizontal */
+  grid-column-start: 1;
+  grid-column-end: 2;
+  /* Vertical */
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+/*#square1 {
+  background: blue;
+  grid-column-start: 7;
+  grid-column-end: 8;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}*/
