@@ -30,6 +30,20 @@ const right = document.getElementById('right');
 const left = document.getElementById('left');
 
 // ---------------------------------------
+// List possible parts
+// ---------------------------------------
+
+const possibleParts = [
+  tPart,
+  iPart,
+  jPart,
+  lPart,
+  oPart,
+  sPart,
+  zPart
+];
+
+// ---------------------------------------
 // State of all stopped square
 // ---------------------------------------
 
@@ -42,10 +56,12 @@ let allSquareEndPosition = [];
 const tetrisInit = () => {
 
   // ---------------------------------------
-  // Create new game part
+  // Create new random part
   // ---------------------------------------
 
-  const part = zPart();
+  const randomIndex = Math.floor(Math.random() * 7);
+
+  const part = possibleParts[randomIndex]()
 
   canvas.appendChild(part.left);
   canvas.appendChild(part.top);
