@@ -11,6 +11,7 @@
   box-sizing: border-box;
   border: 1px solid #fff;
 }
+
 .t {
   background: #f441d6;
 }
@@ -37,8 +38,4 @@
 
 .z {
   background: #f14819;
-}
-
-.border {
-  border: 1px solid;
 }

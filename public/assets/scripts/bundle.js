@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -142,6 +142,27 @@ exports.default = getComputedStyleLine;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var moveToBottom = function moveToBottom(element) {
+
+  var currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
+  var currentRowEnd = parseInt(window.getComputedStyle(element).gridRowEnd);
+
+  element.style.gridRowStart = currentRowStart + 1;
+  element.style.gridRowEnd = currentRowEnd + 1;
+};
+
+exports.default = moveToBottom;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _newSquare = __webpack_require__(0);
 
@@ -190,7 +211,7 @@ var iPart = function iPart() {
 exports.default = iPart;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -247,7 +268,7 @@ var jPart = function jPart() {
 exports.default = jPart;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -304,7 +325,7 @@ var lPart = function lPart() {
 exports.default = lPart;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -314,7 +335,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToBottom = __webpack_require__(15);
+var _moveToBottom = __webpack_require__(3);
 
 var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
 
@@ -331,7 +352,7 @@ var movePartToBottom = function movePartToBottom(part) {
 exports.default = movePartToBottom;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -341,7 +362,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToLeft = __webpack_require__(16);
+var _moveToLeft = __webpack_require__(17);
 
 var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
 
@@ -363,7 +384,7 @@ var movePartToLeft = function movePartToLeft(part) {
 exports.default = movePartToLeft;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -373,7 +394,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToRight = __webpack_require__(17);
+var _moveToRight = __webpack_require__(18);
 
 var _moveToRight2 = _interopRequireDefault(_moveToRight);
 
@@ -395,7 +416,7 @@ var movePartToRight = function movePartToRight(part) {
 exports.default = movePartToRight;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -452,7 +473,7 @@ var oPart = function oPart() {
 exports.default = oPart;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -484,7 +505,7 @@ var registerAllSquareEndPositions = function registerAllSquareEndPositions(part,
 exports.default = registerAllSquareEndPositions;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -541,7 +562,99 @@ var sPart = function sPart() {
 exports.default = sPart;
 
 /***/ }),
-/* 12 */
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _getComputedStyleLine = __webpack_require__(2);
+
+var _getComputedStyleLine2 = _interopRequireDefault(_getComputedStyleLine);
+
+var _moveToBottom = __webpack_require__(3);
+
+var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
+
+var _getSquarePosition = __webpack_require__(1);
+
+var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var scorePoints = function scorePoints(squareList) {
+
+  // --------------
+  // Iterating all lines
+  // --------------
+
+  for (var i = 1; i < 21; i++) {
+
+    // --------------
+    // Filter squares in some line
+    // --------------
+
+    var equalPartsList = squareList.filter(function (square) {
+      return square.rowStart == i;
+    });
+
+    var isCompleteLine = equalPartsList.length == '10';
+
+    if (isCompleteLine) {
+
+      // --------------
+      // Clean all square positions
+      // --------------
+
+      squareList.splice(0, squareList.length); // clean array
+
+      // --------------
+      // Iterating all real square nodes
+      // --------------
+
+      var _equalPartsList = document.querySelectorAll('.part');
+
+      _equalPartsList.forEach(function (item) {
+
+        // --------------
+        // Remove all complete line
+        // --------------
+
+        var isMemberOfCompleteLine = (0, _getComputedStyleLine2.default)(item, 'gridRowStart') == i;
+
+        if (isMemberOfCompleteLine) {
+          item.remove();
+        }
+
+        // --------------
+        // Move all squares from top to bottom
+        // --------------
+
+        var isTopOfCompleteLine = (0, _getComputedStyleLine2.default)(item, 'gridRowStart') < i;
+
+        if (isTopOfCompleteLine) {
+          (0, _moveToBottom2.default)(item);
+        }
+
+        // --------------
+        // Re register all square positions
+        // --------------
+
+        var SquareNewEndPosition = (0, _getSquarePosition2.default)(item);
+        squareList.push(SquareNewEndPosition);
+      });
+    }
+  }
+};
+
+exports.default = scorePoints;
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -598,7 +711,7 @@ var tPart = function tPart() {
 exports.default = tPart;
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -655,49 +768,49 @@ var zPart = function zPart() {
 exports.default = zPart;
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _tPart = __webpack_require__(12);
+var _tPart = __webpack_require__(14);
 
 var _tPart2 = _interopRequireDefault(_tPart);
 
-var _iPart = __webpack_require__(3);
+var _iPart = __webpack_require__(4);
 
 var _iPart2 = _interopRequireDefault(_iPart);
 
-var _jPart = __webpack_require__(4);
+var _jPart = __webpack_require__(5);
 
 var _jPart2 = _interopRequireDefault(_jPart);
 
-var _lPart = __webpack_require__(5);
+var _lPart = __webpack_require__(6);
 
 var _lPart2 = _interopRequireDefault(_lPart);
 
-var _oPart = __webpack_require__(9);
+var _oPart = __webpack_require__(10);
 
 var _oPart2 = _interopRequireDefault(_oPart);
 
-var _sPart = __webpack_require__(11);
+var _sPart = __webpack_require__(12);
 
 var _sPart2 = _interopRequireDefault(_sPart);
 
-var _zPart = __webpack_require__(13);
+var _zPart = __webpack_require__(15);
 
 var _zPart2 = _interopRequireDefault(_zPart);
 
-var _movePartToBottom = __webpack_require__(6);
+var _movePartToBottom = __webpack_require__(7);
 
 var _movePartToBottom2 = _interopRequireDefault(_movePartToBottom);
 
-var _movePartToRight = __webpack_require__(8);
+var _movePartToRight = __webpack_require__(9);
 
 var _movePartToRight2 = _interopRequireDefault(_movePartToRight);
 
-var _movePartToLeft = __webpack_require__(7);
+var _movePartToLeft = __webpack_require__(8);
 
 var _movePartToLeft2 = _interopRequireDefault(_movePartToLeft);
 
@@ -705,7 +818,7 @@ var _getSquarePosition = __webpack_require__(1);
 
 var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
 
-var _registerAllSquareEndPositions = __webpack_require__(10);
+var _registerAllSquareEndPositions = __webpack_require__(11);
 
 var _registerAllSquareEndPositions2 = _interopRequireDefault(_registerAllSquareEndPositions);
 
@@ -713,7 +826,7 @@ var _getComputedStyleLine = __webpack_require__(2);
 
 var _getComputedStyleLine2 = _interopRequireDefault(_getComputedStyleLine);
 
-var _scorePoints = __webpack_require__(18);
+var _scorePoints = __webpack_require__(13);
 
 var _scorePoints2 = _interopRequireDefault(_scorePoints);
 
@@ -733,8 +846,10 @@ var canvas = document.getElementById('canvas');
 // Import all helpers
 // ---------------------------------------
 
-var right = document.getElementById('right');
-var left = document.getElementById('left');
+var right = document.getElementById('rightBtn');
+var left = document.getElementById('leftBtn');
+var play = document.getElementById('playBtn');
+var reset = document.getElementById('resetBtn');
 
 // ---------------------------------------
 // List possible parts
@@ -771,6 +886,10 @@ var tetrisInit = function tetrisInit() {
   // Add event handlers
   // ---------------------------------------
 
+  // --------------
+  // Btn handlers
+  // --------------
+
   var handlerToRight = function handlerToRight() {
     return (0, _movePartToRight2.default)(part);
   };
@@ -780,6 +899,20 @@ var tetrisInit = function tetrisInit() {
 
   right.addEventListener('click', handlerToRight);
   left.addEventListener('click', handlerToLeft);
+
+  // --------------
+  // Keyboard handlers
+  // --------------
+
+  var keyboardHandlers = function keyboardHandlers(e) {
+    var pressRight = e.which == 39 || e.keyCode == 39;
+    var pressLeft = e.which == 37 || e.keyCode == 37;
+
+    if (pressRight) handlerToRight();
+    if (pressLeft) handlerToLeft();
+  };
+
+  window.addEventListener('keydown', keyboardHandlers);
 
   // ---------------------------------------
   // Start game
@@ -877,6 +1010,7 @@ var tetrisInit = function tetrisInit() {
 
       right.removeEventListener('click', handlerToRight);
       left.removeEventListener('click', handlerToLeft);
+      window.removeEventListener('keydown', keyboardHandlers);
 
       // --------------
       // Finish this round
@@ -905,31 +1039,37 @@ var tetrisInit = function tetrisInit() {
   }, 300); // Round time
 };
 
-tetrisInit();
+// ---------------------------------------
+// Basic controls
+// ---------------------------------------
 
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
+// --------------
+// Play with btn
+// --------------
 
-"use strict";
+play.addEventListener('click', tetrisInit);
 
+// --------------
+// Play with keyboard
+// --------------
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var moveToBottom = function moveToBottom(element) {
-
-  var currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
-  var currentRowEnd = parseInt(window.getComputedStyle(element).gridRowEnd);
-
-  element.style.gridRowStart = currentRowStart + 1;
-  element.style.gridRowEnd = currentRowEnd + 1;
+var keyboardPlay = function keyboardPlay(e) {
+  var pressEnter = e.which == 13 || e.keyCode == 13;
+  if (pressEnter) tetrisInit();
 };
 
-exports.default = moveToBottom;
+window.addEventListener('keydown', keyboardPlay);
+
+// --------------
+// Reset
+// --------------
+
+reset.addEventListener('click', function () {
+  location.reload();
+});
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -952,7 +1092,7 @@ var moveToLeft = function moveToLeft(element) {
 exports.default = moveToLeft;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -978,98 +1118,6 @@ var moveToRight = function moveToRight(element) {
 };
 
 exports.default = moveToRight;
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _getComputedStyleLine = __webpack_require__(2);
-
-var _getComputedStyleLine2 = _interopRequireDefault(_getComputedStyleLine);
-
-var _moveToBottom = __webpack_require__(15);
-
-var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
-
-var _getSquarePosition = __webpack_require__(1);
-
-var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var scorePoints = function scorePoints(squareList) {
-
-  // --------------
-  // Iterating all lines
-  // --------------
-
-  for (var i = 1; i < 21; i++) {
-
-    // --------------
-    // Filter squares in some line
-    // --------------
-
-    var equalPartsList = squareList.filter(function (square) {
-      return square.rowStart == i;
-    });
-
-    var isCompleteLine = equalPartsList.length == '10';
-
-    if (isCompleteLine) {
-
-      // --------------
-      // Clean all square positions
-      // --------------
-
-      squareList.splice(0, squareList.length); // clean array
-
-      // --------------
-      // Iterating all real square nodes
-      // --------------
-
-      var _equalPartsList = document.querySelectorAll('.part');
-
-      _equalPartsList.forEach(function (item) {
-
-        // --------------
-        // Remove all complete line
-        // --------------
-
-        var isMemberOfCompleteLine = (0, _getComputedStyleLine2.default)(item, 'gridRowStart') == i;
-
-        if (isMemberOfCompleteLine) {
-          item.remove();
-        }
-
-        // --------------
-        // Move all squares from top to bottom
-        // --------------
-
-        var isTopOfCompleteLine = (0, _getComputedStyleLine2.default)(item, 'gridRowStart') < i;
-
-        if (isTopOfCompleteLine) {
-          (0, _moveToBottom2.default)(item);
-        }
-
-        // --------------
-        // Re register all square positions
-        // --------------
-
-        var SquareNewEndPosition = (0, _getSquarePosition2.default)(item);
-        squareList.push(SquareNewEndPosition);
-      });
-    }
-  }
-};
-
-exports.default = scorePoints;
 
 /***/ })
 /******/ ]);

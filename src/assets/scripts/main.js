@@ -27,8 +27,10 @@ import scorePoints from './scorePoints';
 // ---------------------------------------
 
 const canvas = document.getElementById('canvas');
-const right = document.getElementById('right');
-const left = document.getElementById('left');
+const right = document.getElementById('rightBtn');
+const left = document.getElementById('leftBtn');
+const play = document.getElementById('playBtn');
+const reset = document.getElementById('resetBtn');
 
 // ---------------------------------------
 // List possible parts
@@ -73,11 +75,29 @@ const tetrisInit = () => {
   // Add event handlers
   // ---------------------------------------
 
+  // --------------
+  // Btn handlers
+  // --------------
+
   const handlerToRight = () => movePartToRight(part);
   const handlerToLeft = () => movePartToLeft(part);
 
   right.addEventListener('click', handlerToRight);
   left.addEventListener('click', handlerToLeft);
+
+  // --------------
+  // Keyboard handlers
+  // --------------
+
+  const keyboardHandlers = (e) => {
+    const pressRight = e.which == 39 || e.keyCode == 39;
+    const pressLeft = e.which == 37 || e.keyCode == 37;
+
+    if (pressRight) handlerToRight();
+    if (pressLeft) handlerToLeft();
+  }
+
+  window.addEventListener('keydown', keyboardHandlers);
 
   // ---------------------------------------
   // Start game
@@ -177,6 +197,7 @@ const tetrisInit = () => {
 
       right.removeEventListener('click', handlerToRight);
       left.removeEventListener('click', handlerToLeft);
+      window.removeEventListener('keydown', keyboardHandlers);
 
       // --------------
       // Finish this round
@@ -208,4 +229,31 @@ const tetrisInit = () => {
 
 }
 
-tetrisInit();
+// ---------------------------------------
+// Basic controls
+// ---------------------------------------
+
+// --------------
+// Play with btn
+// --------------
+
+play.addEventListener('click', tetrisInit);
+
+// --------------
+// Play with keyboard
+// --------------
+
+const keyboardPlay = (e) => {
+  const pressEnter = e.which == 13 || e.keyCode == 13;
+  if (pressEnter) tetrisInit();
+}
+
+window.addEventListener('keydown', keyboardPlay);
+
+// --------------
+// Reset
+// --------------
+
+reset.addEventListener('click', () => {
+  location.reload();
+});
