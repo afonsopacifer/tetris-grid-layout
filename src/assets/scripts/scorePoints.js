@@ -1,6 +1,6 @@
-import getComputedStyleLine from './getComputedStyleLine';
-import moveToBottom from './moveToBottom';
-import getSquarePosition from './getSquarePosition';
+import getComputedStyleLine from './utils/squares/getComputedStyleLine';
+import moveToBottom from './movements/squares/moveToBottom';
+import getSquarePosition from './utils/squares/getSquarePosition';
 
 const scorePoints = squareList => {
 

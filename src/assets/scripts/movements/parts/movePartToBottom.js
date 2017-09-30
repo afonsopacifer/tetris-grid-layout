@@ -1,4 +1,4 @@
-import moveToBottom from './moveToBottom';
+import moveToBottom from './../squares/moveToBottom';
 
 const movePartToBottom = (part) => {
 

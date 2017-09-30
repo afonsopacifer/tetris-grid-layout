@@ -1,34 +1,33 @@
-import newSquare from './newSquare';
-
-const sPart = () => {
+import newSquare from './../utils/squares/newSquare';
+const tPart = () => {
 
   const square1 = newSquare({
     gridRowStart: 1,
     gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 's');
+    gridColumnStart: 5,
+    gridColumnEnd: 6
+  }, 't');
 
   const square2 = newSquare({
     gridRowStart: 1,
     gridRowEnd: 2,
-    gridColumnStart: 7,
-    gridColumnEnd: 8
-  }, 's');
+    gridColumnStart: 6,
+    gridColumnEnd: 7
+  }, 't');
 
   const square3 = newSquare({
     gridRowStart: 2,
     gridRowEnd: 3,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 's');
-
-  const square4 = newSquare({
-    gridRowStart: 2,
-    gridRowEnd: 3,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 's');
+  }, 't');
+
+  const square4 = newSquare({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 7,
+    gridColumnEnd: 8
+  }, 't');
 
   return {
     left: square1,
@@ -39,4 +38,4 @@ const sPart = () => {
 
 };
 
-export default sPart;
+export default tPart;

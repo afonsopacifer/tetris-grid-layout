@@ -1,4 +1,4 @@
-import moveToLeft  from './moveToLeft';
+import moveToLeft  from './../squares/moveToLeft';
 
 const movePartToLeft = (part) => {
 

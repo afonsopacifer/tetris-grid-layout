@@ -63,98 +63,17 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var newSquare = function newSquare(obj, colorClass) {
-
-  var squareElement = document.createElement('div');
-
-  squareElement.style.gridRowStart = obj.gridRowStart;
-  squareElement.style.gridRowEnd = obj.gridRowEnd;
-  squareElement.style.gridColumnStart = obj.gridColumnStart;
-  squareElement.style.gridColumnEnd = obj.gridColumnEnd;
-
-  squareElement.classList.add('part');
-  squareElement.classList.add(colorClass);
-
-  return squareElement;
-};
-
-exports.default = newSquare;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var getSquarePosition = function getSquarePosition(square) {
-
-  var columnStartValue = parseInt(window.getComputedStyle(square).gridColumnStart);
-  var rowStartValue = parseInt(window.getComputedStyle(square).gridRowStart);
-
-  return {
-    columnStart: columnStartValue,
-    rowStart: rowStartValue
-  };
-};
-
-exports.default = getSquarePosition;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var getComputedStyleLine = function getComputedStyleLine(square, lineName) {
-  return parseInt(window.getComputedStyle(square)[lineName]);
-};
-
-exports.default = getComputedStyleLine;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var moveToBottom = function moveToBottom(element) {
-
-  var currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
-  var currentRowEnd = parseInt(window.getComputedStyle(element).gridRowEnd);
-
-  element.style.gridRowStart = currentRowStart + 1;
-  element.style.gridRowEnd = currentRowEnd + 1;
-};
-
-exports.default = moveToBottom;
-
-/***/ }),
-/* 4 */
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -164,7 +83,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _newSquare = __webpack_require__(0);
+var _newSquare = __webpack_require__(28);
 
 var _newSquare2 = _interopRequireDefault(_newSquare);
 
@@ -211,7 +130,7 @@ var iPart = function iPart() {
 exports.default = iPart;
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -221,7 +140,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _newSquare = __webpack_require__(0);
+var _newSquare = __webpack_require__(28);
 
 var _newSquare2 = _interopRequireDefault(_newSquare);
 
@@ -268,7 +187,7 @@ var jPart = function jPart() {
 exports.default = jPart;
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -278,7 +197,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _newSquare = __webpack_require__(0);
+var _newSquare = __webpack_require__(28);
 
 var _newSquare2 = _interopRequireDefault(_newSquare);
 
@@ -325,65 +244,6 @@ var lPart = function lPart() {
 exports.default = lPart;
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _moveToBottom = __webpack_require__(3);
-
-var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var movePartToBottom = function movePartToBottom(part) {
-
-  (0, _moveToBottom2.default)(part.left);
-  (0, _moveToBottom2.default)(part.top);
-  (0, _moveToBottom2.default)(part.bottom);
-  (0, _moveToBottom2.default)(part.right);
-};
-
-exports.default = movePartToBottom;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _moveToLeft = __webpack_require__(17);
-
-var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var movePartToLeft = function movePartToLeft(part) {
-
-  var currentColumnStart = parseInt(window.getComputedStyle(part.left).gridColumnStart);
-
-  if (currentColumnStart >= 2) {
-
-    (0, _moveToLeft2.default)(part.left);
-    (0, _moveToLeft2.default)(part.top);
-    (0, _moveToLeft2.default)(part.bottom);
-    (0, _moveToLeft2.default)(part.right);
-  }
-};
-
-exports.default = movePartToLeft;
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -394,39 +254,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToRight = __webpack_require__(18);
-
-var _moveToRight2 = _interopRequireDefault(_moveToRight);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var movePartToRight = function movePartToRight(part) {
-
-  var currentColumnStart = parseInt(window.getComputedStyle(part.right).gridColumnStart);
-
-  if (currentColumnStart < 10) {
-
-    (0, _moveToRight2.default)(part.left);
-    (0, _moveToRight2.default)(part.top);
-    (0, _moveToRight2.default)(part.bottom);
-    (0, _moveToRight2.default)(part.right);
-  }
-};
-
-exports.default = movePartToRight;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _newSquare = __webpack_require__(0);
+var _newSquare = __webpack_require__(28);
 
 var _newSquare2 = _interopRequireDefault(_newSquare);
 
@@ -473,7 +301,7 @@ var oPart = function oPart() {
 exports.default = oPart;
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -483,39 +311,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _getSquarePosition = __webpack_require__(1);
-
-var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var registerAllSquareEndPositions = function registerAllSquareEndPositions(part, squarePositionsList) {
-
-  var leftSquareEndPosition = (0, _getSquarePosition2.default)(part.left);
-  var topSquareEndPosition = (0, _getSquarePosition2.default)(part.top);
-  var bottomSquareEndPosition = (0, _getSquarePosition2.default)(part.bottom);
-  var rightSquareEndPosition = (0, _getSquarePosition2.default)(part.right);
-
-  squarePositionsList.push(leftSquareEndPosition);
-  squarePositionsList.push(topSquareEndPosition);
-  squarePositionsList.push(bottomSquareEndPosition);
-  squarePositionsList.push(rightSquareEndPosition);
-};
-
-exports.default = registerAllSquareEndPositions;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _newSquare = __webpack_require__(0);
+var _newSquare = __webpack_require__(28);
 
 var _newSquare2 = _interopRequireDefault(_newSquare);
 
@@ -562,7 +358,7 @@ var sPart = function sPart() {
 exports.default = sPart;
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -572,15 +368,130 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _getComputedStyleLine = __webpack_require__(2);
+var _newSquare = __webpack_require__(28);
+
+var _newSquare2 = _interopRequireDefault(_newSquare);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var tPart = function tPart() {
+
+  var square1 = (0, _newSquare2.default)({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 5,
+    gridColumnEnd: 6
+  }, 't');
+
+  var square2 = (0, _newSquare2.default)({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 6,
+    gridColumnEnd: 7
+  }, 't');
+
+  var square3 = (0, _newSquare2.default)({
+    gridRowStart: 2,
+    gridRowEnd: 3,
+    gridColumnStart: 6,
+    gridColumnEnd: 7
+  }, 't');
+
+  var square4 = (0, _newSquare2.default)({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 7,
+    gridColumnEnd: 8
+  }, 't');
+
+  return {
+    left: square1,
+    top: square2,
+    bottom: square3,
+    right: square4
+  };
+};
+
+exports.default = tPart;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _newSquare = __webpack_require__(28);
+
+var _newSquare2 = _interopRequireDefault(_newSquare);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var zPart = function zPart() {
+
+  var square1 = (0, _newSquare2.default)({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 5,
+    gridColumnEnd: 6
+  }, 'z');
+
+  var square2 = (0, _newSquare2.default)({
+    gridRowStart: 1,
+    gridRowEnd: 2,
+    gridColumnStart: 6,
+    gridColumnEnd: 7
+  }, 'z');
+
+  var square3 = (0, _newSquare2.default)({
+    gridRowStart: 2,
+    gridRowEnd: 3,
+    gridColumnStart: 6,
+    gridColumnEnd: 7
+  }, 'z');
+
+  var square4 = (0, _newSquare2.default)({
+    gridRowStart: 2,
+    gridRowEnd: 3,
+    gridColumnStart: 7,
+    gridColumnEnd: 8
+  }, 'z');
+
+  return {
+    left: square1,
+    top: square2,
+    bottom: square3,
+    right: square4
+  };
+};
+
+exports.default = zPart;
+
+/***/ }),
+/* 13 */,
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _getComputedStyleLine = __webpack_require__(26);
 
 var _getComputedStyleLine2 = _interopRequireDefault(_getComputedStyleLine);
 
-var _moveToBottom = __webpack_require__(3);
+var _moveToBottom = __webpack_require__(22);
 
 var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
 
-var _getSquarePosition = __webpack_require__(1);
+var _getSquarePosition = __webpack_require__(27);
 
 var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
 
@@ -673,179 +584,65 @@ var scorePoints = function scorePoints(squareList) {
 exports.default = scorePoints;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _newSquare = __webpack_require__(0);
-
-var _newSquare2 = _interopRequireDefault(_newSquare);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var tPart = function tPart() {
-
-  var square1 = (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 't');
-
-  var square2 = (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 't');
-
-  var square3 = (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 't');
-
-  var square4 = (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 7,
-    gridColumnEnd: 8
-  }, 't');
-
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
-};
-
-exports.default = tPart;
-
-/***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _newSquare = __webpack_require__(0);
-
-var _newSquare2 = _interopRequireDefault(_newSquare);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var zPart = function zPart() {
-
-  var square1 = (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'z');
-
-  var square2 = (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'z');
-
-  var square3 = (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'z');
-
-  var square4 = (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 7,
-    gridColumnEnd: 8
-  }, 'z');
-
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
-};
-
-exports.default = zPart;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _tPart = __webpack_require__(14);
+var _tPart = __webpack_require__(11);
 
 var _tPart2 = _interopRequireDefault(_tPart);
 
-var _iPart = __webpack_require__(4);
+var _iPart = __webpack_require__(6);
 
 var _iPart2 = _interopRequireDefault(_iPart);
 
-var _jPart = __webpack_require__(5);
+var _jPart = __webpack_require__(7);
 
 var _jPart2 = _interopRequireDefault(_jPart);
 
-var _lPart = __webpack_require__(6);
+var _lPart = __webpack_require__(8);
 
 var _lPart2 = _interopRequireDefault(_lPart);
 
-var _oPart = __webpack_require__(10);
+var _oPart = __webpack_require__(9);
 
 var _oPart2 = _interopRequireDefault(_oPart);
 
-var _sPart = __webpack_require__(12);
+var _sPart = __webpack_require__(10);
 
 var _sPart2 = _interopRequireDefault(_sPart);
 
-var _zPart = __webpack_require__(15);
+var _zPart = __webpack_require__(12);
 
 var _zPart2 = _interopRequireDefault(_zPart);
 
-var _movePartToBottom = __webpack_require__(7);
+var _movePartToBottom = __webpack_require__(19);
 
 var _movePartToBottom2 = _interopRequireDefault(_movePartToBottom);
 
-var _movePartToRight = __webpack_require__(9);
+var _movePartToRight = __webpack_require__(21);
 
 var _movePartToRight2 = _interopRequireDefault(_movePartToRight);
 
-var _movePartToLeft = __webpack_require__(8);
+var _movePartToLeft = __webpack_require__(20);
 
 var _movePartToLeft2 = _interopRequireDefault(_movePartToLeft);
 
-var _getSquarePosition = __webpack_require__(1);
+var _getSquarePosition = __webpack_require__(27);
 
 var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
 
-var _registerAllSquareEndPositions = __webpack_require__(11);
+var _registerAllSquareEndPositions = __webpack_require__(25);
 
 var _registerAllSquareEndPositions2 = _interopRequireDefault(_registerAllSquareEndPositions);
 
-var _getComputedStyleLine = __webpack_require__(2);
+var _getComputedStyleLine = __webpack_require__(26);
 
 var _getComputedStyleLine2 = _interopRequireDefault(_getComputedStyleLine);
 
-var _scorePoints = __webpack_require__(13);
+var _scorePoints = __webpack_require__(14);
 
 var _scorePoints2 = _interopRequireDefault(_scorePoints);
 
@@ -1105,7 +902,122 @@ reset.addEventListener('click', function () {
 });
 
 /***/ }),
-/* 17 */
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _moveToBottom = __webpack_require__(22);
+
+var _moveToBottom2 = _interopRequireDefault(_moveToBottom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var movePartToBottom = function movePartToBottom(part) {
+
+  (0, _moveToBottom2.default)(part.left);
+  (0, _moveToBottom2.default)(part.top);
+  (0, _moveToBottom2.default)(part.bottom);
+  (0, _moveToBottom2.default)(part.right);
+};
+
+exports.default = movePartToBottom;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _moveToLeft = __webpack_require__(23);
+
+var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var movePartToLeft = function movePartToLeft(part) {
+
+  var currentColumnStart = parseInt(window.getComputedStyle(part.left).gridColumnStart);
+
+  if (currentColumnStart >= 2) {
+
+    (0, _moveToLeft2.default)(part.left);
+    (0, _moveToLeft2.default)(part.top);
+    (0, _moveToLeft2.default)(part.bottom);
+    (0, _moveToLeft2.default)(part.right);
+  }
+};
+
+exports.default = movePartToLeft;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _moveToRight = __webpack_require__(24);
+
+var _moveToRight2 = _interopRequireDefault(_moveToRight);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var movePartToRight = function movePartToRight(part) {
+
+  var currentColumnStart = parseInt(window.getComputedStyle(part.right).gridColumnStart);
+
+  if (currentColumnStart < 10) {
+
+    (0, _moveToRight2.default)(part.left);
+    (0, _moveToRight2.default)(part.top);
+    (0, _moveToRight2.default)(part.bottom);
+    (0, _moveToRight2.default)(part.right);
+  }
+};
+
+exports.default = movePartToRight;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var moveToBottom = function moveToBottom(element) {
+
+  var currentRowStart = parseInt(window.getComputedStyle(element).gridRowStart);
+  var currentRowEnd = parseInt(window.getComputedStyle(element).gridRowEnd);
+
+  element.style.gridRowStart = currentRowStart + 1;
+  element.style.gridRowEnd = currentRowEnd + 1;
+};
+
+exports.default = moveToBottom;
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1128,7 +1040,7 @@ var moveToLeft = function moveToLeft(element) {
 exports.default = moveToLeft;
 
 /***/ }),
-/* 18 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1154,6 +1066,104 @@ var moveToRight = function moveToRight(element) {
 };
 
 exports.default = moveToRight;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _getSquarePosition = __webpack_require__(27);
+
+var _getSquarePosition2 = _interopRequireDefault(_getSquarePosition);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var registerAllSquareEndPositions = function registerAllSquareEndPositions(part, squarePositionsList) {
+
+  var leftSquareEndPosition = (0, _getSquarePosition2.default)(part.left);
+  var topSquareEndPosition = (0, _getSquarePosition2.default)(part.top);
+  var bottomSquareEndPosition = (0, _getSquarePosition2.default)(part.bottom);
+  var rightSquareEndPosition = (0, _getSquarePosition2.default)(part.right);
+
+  squarePositionsList.push(leftSquareEndPosition);
+  squarePositionsList.push(topSquareEndPosition);
+  squarePositionsList.push(bottomSquareEndPosition);
+  squarePositionsList.push(rightSquareEndPosition);
+};
+
+exports.default = registerAllSquareEndPositions;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getComputedStyleLine = function getComputedStyleLine(square, lineName) {
+  return parseInt(window.getComputedStyle(square)[lineName]);
+};
+
+exports.default = getComputedStyleLine;
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getSquarePosition = function getSquarePosition(square) {
+
+  var columnStartValue = parseInt(window.getComputedStyle(square).gridColumnStart);
+  var rowStartValue = parseInt(window.getComputedStyle(square).gridRowStart);
+
+  return {
+    columnStart: columnStartValue,
+    rowStart: rowStartValue
+  };
+};
+
+exports.default = getSquarePosition;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var newSquare = function newSquare(obj, colorClass) {
+
+  var squareElement = document.createElement('div');
+
+  squareElement.style.gridRowStart = obj.gridRowStart;
+  squareElement.style.gridRowEnd = obj.gridRowEnd;
+  squareElement.style.gridColumnStart = obj.gridColumnStart;
+  squareElement.style.gridColumnEnd = obj.gridColumnEnd;
+
+  squareElement.classList.add('part');
+  squareElement.classList.add(colorClass);
+
+  return squareElement;
+};
+
+exports.default = newSquare;
 
 /***/ })
 /******/ ]);

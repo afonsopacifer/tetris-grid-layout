@@ -2,24 +2,24 @@
 // Import all parts profiles
 // ---------------------------------------
 
-import tPart from './tPart';
-import iPart from './iPart';
-import jPart from './jPart';
-import lPart from './lPart';
-import oPart from './oPart';
-import sPart from './sPart';
-import zPart from './zPart';
+import tPart from './parts/tPart';
+import iPart from './parts/iPart';
+import jPart from './parts/jPart';
+import lPart from './parts/lPart';
+import oPart from './parts/oPart';
+import sPart from './parts/sPart';
+import zPart from './parts/zPart';
 
 // ---------------------------------------
 // Import all helpers
 // ---------------------------------------
 
-import movePartToBottom from './movePartToBottom';
-import movePartToRight from './movePartToRight';
-import movePartToLeft from './movePartToLeft';
-import getSquarePosition from './getSquarePosition';
-import registerAllSquareEndPositions from './registerAllSquareEndPositions';
-import getComputedStyleLine from './getComputedStyleLine';
+import movePartToBottom from './movements/parts/movePartToBottom';
+import movePartToRight from './movements/parts/movePartToRight';
+import movePartToLeft from './movements/parts/movePartToLeft';
+import getSquarePosition from './utils/squares/getSquarePosition';
+import registerAllSquareEndPositions from './utils/parts/registerAllSquareEndPositions';
+import getComputedStyleLine from './utils/squares/getComputedStyleLine';
 import scorePoints from './scorePoints';
 
 // ---------------------------------------

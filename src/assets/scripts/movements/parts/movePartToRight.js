@@ -1,4 +1,4 @@
-import moveToRight  from './moveToRight';
+import moveToRight  from './../squares/moveToRight';
 
 const movePartToRight = (part) => {
 

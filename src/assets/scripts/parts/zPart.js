@@ -1,4 +1,4 @@
-import newSquare from './newSquare';
+import newSquare from './../utils/squares/newSquare';
 
 const zPart = () => {
 

@@ -1,4 +1,4 @@
-import getSquarePosition from './getSquarePosition';
+import getSquarePosition from './../squares/getSquarePosition';
 
 const registerAllSquareEndPositions = (part, squarePositionsList) => {
 
