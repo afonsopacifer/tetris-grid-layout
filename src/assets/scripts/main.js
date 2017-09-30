@@ -56,6 +56,11 @@ let allSquareEndPosition = [];
 // The tetris game
 // ---------------------------------------
 
+
+
+let playState;
+
+
 const tetrisInit = () => {
 
   // ---------------------------------------
@@ -105,128 +110,128 @@ const tetrisInit = () => {
 
   const down = setInterval(() => {
 
-    // ---------------------------------------
-    // Check collision with all stopped square
-    // todo: Refactor and implement left & right collisions
-    // ---------------------------------------
+    if(playState) {
+      // ---------------------------------------
+      // Check collision with all stopped square
+      // todo: Refactor and implement left & right collisions
+      // ---------------------------------------
 
-    let noCollidedWithAnotherSquare = true;
-
-    // --------------
-    // Get all part square positions for test
-    // --------------
-
-    const bottomPartCurrentRowEnd = getComputedStyleLine(part.bottom, 'gridRowEnd');
-    const bottomPartCurrentColumnStart = getComputedStyleLine(part.bottom, 'gridColumnStart');
-
-    const leftPartCurrentRowEnd = getComputedStyleLine(part.left, 'gridRowEnd');
-    const leftPartCurrentColumnStart = getComputedStyleLine(part.left, 'gridColumnStart');
-
-    const rightPartCurrentRowEnd = getComputedStyleLine(part.right, 'gridRowEnd');
-    const rightPartCurrentColumnStart = getComputedStyleLine(part.right, 'gridColumnStart');
-
-    const topPartCurrentRowEnd = getComputedStyleLine(part.top, 'gridRowEnd');
-    const topPartCurrentColumnStart = getComputedStyleLine(part.top, 'gridColumnStart');
-
-    // --------------
-    // Test collision with all stopped square
-    // --------------
-
-    allSquareEndPosition.forEach((stoppedSquare) => {
+      let noCollidedWithAnotherSquare = true;
 
       // --------------
-      // Test bottom square
+      // Get all part square positions for test
       // --------------
 
-      const bottomSquareCollided = bottomPartCurrentRowEnd == stoppedSquare.rowStart && bottomPartCurrentColumnStart == stoppedSquare.columnStart;
+      const bottomPartCurrentRowEnd = getComputedStyleLine(part.bottom, 'gridRowEnd');
+      const bottomPartCurrentColumnStart = getComputedStyleLine(part.bottom, 'gridColumnStart');
 
-      if (bottomSquareCollided) noCollidedWithAnotherSquare = false;
+      const leftPartCurrentRowEnd = getComputedStyleLine(part.left, 'gridRowEnd');
+      const leftPartCurrentColumnStart = getComputedStyleLine(part.left, 'gridColumnStart');
 
-      // --------------
-      // Test left square
-      // --------------
+      const rightPartCurrentRowEnd = getComputedStyleLine(part.right, 'gridRowEnd');
+      const rightPartCurrentColumnStart = getComputedStyleLine(part.right, 'gridColumnStart');
 
-      const leftSquareCollided = leftPartCurrentRowEnd == stoppedSquare.rowStart && leftPartCurrentColumnStart == stoppedSquare.columnStart;
-
-      if (leftSquareCollided) noCollidedWithAnotherSquare = false;
-
-      // --------------
-      // Test right square
-      // --------------
-
-      const rightSquareCollided = rightPartCurrentRowEnd == stoppedSquare.rowStart && rightPartCurrentColumnStart == stoppedSquare.columnStart;
-
-      if (rightSquareCollided) noCollidedWithAnotherSquare = false;
+      const topPartCurrentRowEnd = getComputedStyleLine(part.top, 'gridRowEnd');
+      const topPartCurrentColumnStart = getComputedStyleLine(part.top, 'gridColumnStart');
 
       // --------------
-      // Test top square
+      // Test collision with all stopped square
       // --------------
 
-      const topSquareCollided = topPartCurrentRowEnd == stoppedSquare.rowStart && topPartCurrentColumnStart == stoppedSquare.columnStart;
+      allSquareEndPosition.forEach((stoppedSquare) => {
 
-      if (topSquareCollided) noCollidedWithAnotherSquare = false;
+        // --------------
+        // Test bottom square
+        // --------------
 
-    })
+        const bottomSquareCollided = bottomPartCurrentRowEnd == stoppedSquare.rowStart && bottomPartCurrentColumnStart == stoppedSquare.columnStart;
 
-    // ---------------------------------------
-    // Check collision with game bottom
-    // ---------------------------------------
+        if (bottomSquareCollided) noCollidedWithAnotherSquare = false;
 
-    const currentRowEnd = getComputedStyleLine(part.bottom, 'gridRowEnd');
-    const noReachedTheBottom = currentRowEnd < 21;
+        // --------------
+        // Test left square
+        // --------------
 
-    // ---------------------------------------
-    // Game engine
-    // ---------------------------------------
+        const leftSquareCollided = leftPartCurrentRowEnd == stoppedSquare.rowStart && leftPartCurrentColumnStart == stoppedSquare.columnStart;
 
-    const shouldKeepDown = noReachedTheBottom && noCollidedWithAnotherSquare;
+        if (leftSquareCollided) noCollidedWithAnotherSquare = false;
 
-    if (shouldKeepDown) {
+        // --------------
+        // Test right square
+        // --------------
 
-      // --------------
-      // Continues with the round
-      // --------------
+        const rightSquareCollided = rightPartCurrentRowEnd == stoppedSquare.rowStart && rightPartCurrentColumnStart == stoppedSquare.columnStart;
 
-      movePartToBottom(part);
+        if (rightSquareCollided) noCollidedWithAnotherSquare = false;
 
-    } else {
+        // --------------
+        // Test top square
+        // --------------
 
-      // --------------
-      // Remove handlers for this part
-      // --------------
+        const topSquareCollided = topPartCurrentRowEnd == stoppedSquare.rowStart && topPartCurrentColumnStart == stoppedSquare.columnStart;
 
-      right.removeEventListener('click', handlerToRight);
-      left.removeEventListener('click', handlerToLeft);
-      window.removeEventListener('keydown', keyboardHandlers);
+        if (topSquareCollided) noCollidedWithAnotherSquare = false;
 
-      // --------------
-      // Finish this round
-      // --------------
+      })
 
-      clearInterval(down);
+      // ---------------------------------------
+      // Check collision with game bottom
+      // ---------------------------------------
 
-      // --------------
-      // Save position of all square
-      // --------------
+      const currentRowEnd = getComputedStyleLine(part.bottom, 'gridRowEnd');
+      const noReachedTheBottom = currentRowEnd < 21;
 
-      registerAllSquareEndPositions(part, allSquareEndPosition)
+      // ---------------------------------------
+      // Game engine
+      // ---------------------------------------
 
-      // --------------
-      // Control score moment
-      // --------------
+      const shouldKeepDown = noReachedTheBottom && noCollidedWithAnotherSquare;
 
-      scorePoints(allSquareEndPosition);
+      if (shouldKeepDown) {
 
-      // --------------
-      // Start new round
-      // --------------
+        // --------------
+        // Continues with the round
+        // --------------
 
-      tetrisInit();
+        movePartToBottom(part);
 
+      } else {
+
+        // --------------
+        // Remove handlers for this part
+        // --------------
+
+        right.removeEventListener('click', handlerToRight);
+        left.removeEventListener('click', handlerToLeft);
+        window.removeEventListener('keydown', keyboardHandlers);
+
+        // --------------
+        // Finish this round
+        // --------------
+
+        clearInterval(down);
+
+        // --------------
+        // Save position of all square
+        // --------------
+
+        registerAllSquareEndPositions(part, allSquareEndPosition)
+
+        // --------------
+        // Control score moment
+        // --------------
+
+        scorePoints(allSquareEndPosition);
+
+        // --------------
+        // Start new round
+        // --------------
+
+        tetrisInit();
+
+      }
     }
-
   }, 300); // Round time
-
 }
 
 // ---------------------------------------
@@ -237,18 +242,35 @@ const tetrisInit = () => {
 // Play with btn
 // --------------
 
-play.addEventListener('click', tetrisInit);
+let firstPlay;
+
+const togglePlay = () => {
+
+  playState
+  ? playState = false
+  : playState = true
+
+  if(!firstPlay) {
+    tetrisInit();
+    firstPlay = true;
+  }
+
+  play.classList.contains('btn--pause')
+  ? play.classList.remove('btn--pause')
+  : play.classList.add('btn--pause')
+
+}
+
+play.addEventListener('click', togglePlay);
 
 // --------------
 // Play with keyboard
 // --------------
 
-const keyboardPlay = (e) => {
+window.addEventListener('keydown', (e) => {
   const pressEnter = e.which == 13 || e.keyCode == 13;
-  if (pressEnter) tetrisInit();
-}
-
-window.addEventListener('keydown', keyboardPlay);
+  if (pressEnter) togglePlay();
+});
 
 // --------------
 // Reset

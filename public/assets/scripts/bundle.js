@@ -886,6 +886,9 @@ var allSquareEndPosition = [];
 // The tetris game
 // ---------------------------------------
 
+
+var playState = void 0;
+
 var tetrisInit = function tetrisInit() {
 
   // ---------------------------------------
@@ -939,121 +942,123 @@ var tetrisInit = function tetrisInit() {
 
   var down = setInterval(function () {
 
-    // ---------------------------------------
-    // Check collision with all stopped square
-    // todo: Refactor and implement left & right collisions
-    // ---------------------------------------
+    if (playState) {
+      // ---------------------------------------
+      // Check collision with all stopped square
+      // todo: Refactor and implement left & right collisions
+      // ---------------------------------------
 
-    var noCollidedWithAnotherSquare = true;
-
-    // --------------
-    // Get all part square positions for test
-    // --------------
-
-    var bottomPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.bottom, 'gridRowEnd');
-    var bottomPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.bottom, 'gridColumnStart');
-
-    var leftPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.left, 'gridRowEnd');
-    var leftPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.left, 'gridColumnStart');
-
-    var rightPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.right, 'gridRowEnd');
-    var rightPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.right, 'gridColumnStart');
-
-    var topPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.top, 'gridRowEnd');
-    var topPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.top, 'gridColumnStart');
-
-    // --------------
-    // Test collision with all stopped square
-    // --------------
-
-    allSquareEndPosition.forEach(function (stoppedSquare) {
+      var noCollidedWithAnotherSquare = true;
 
       // --------------
-      // Test bottom square
+      // Get all part square positions for test
       // --------------
 
-      var bottomSquareCollided = bottomPartCurrentRowEnd == stoppedSquare.rowStart && bottomPartCurrentColumnStart == stoppedSquare.columnStart;
+      var bottomPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.bottom, 'gridRowEnd');
+      var bottomPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.bottom, 'gridColumnStart');
 
-      if (bottomSquareCollided) noCollidedWithAnotherSquare = false;
+      var leftPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.left, 'gridRowEnd');
+      var leftPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.left, 'gridColumnStart');
 
-      // --------------
-      // Test left square
-      // --------------
+      var rightPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.right, 'gridRowEnd');
+      var rightPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.right, 'gridColumnStart');
 
-      var leftSquareCollided = leftPartCurrentRowEnd == stoppedSquare.rowStart && leftPartCurrentColumnStart == stoppedSquare.columnStart;
-
-      if (leftSquareCollided) noCollidedWithAnotherSquare = false;
-
-      // --------------
-      // Test right square
-      // --------------
-
-      var rightSquareCollided = rightPartCurrentRowEnd == stoppedSquare.rowStart && rightPartCurrentColumnStart == stoppedSquare.columnStart;
-
-      if (rightSquareCollided) noCollidedWithAnotherSquare = false;
+      var topPartCurrentRowEnd = (0, _getComputedStyleLine2.default)(part.top, 'gridRowEnd');
+      var topPartCurrentColumnStart = (0, _getComputedStyleLine2.default)(part.top, 'gridColumnStart');
 
       // --------------
-      // Test top square
+      // Test collision with all stopped square
       // --------------
 
-      var topSquareCollided = topPartCurrentRowEnd == stoppedSquare.rowStart && topPartCurrentColumnStart == stoppedSquare.columnStart;
+      allSquareEndPosition.forEach(function (stoppedSquare) {
 
-      if (topSquareCollided) noCollidedWithAnotherSquare = false;
-    });
+        // --------------
+        // Test bottom square
+        // --------------
 
-    // ---------------------------------------
-    // Check collision with game bottom
-    // ---------------------------------------
+        var bottomSquareCollided = bottomPartCurrentRowEnd == stoppedSquare.rowStart && bottomPartCurrentColumnStart == stoppedSquare.columnStart;
 
-    var currentRowEnd = (0, _getComputedStyleLine2.default)(part.bottom, 'gridRowEnd');
-    var noReachedTheBottom = currentRowEnd < 21;
+        if (bottomSquareCollided) noCollidedWithAnotherSquare = false;
 
-    // ---------------------------------------
-    // Game engine
-    // ---------------------------------------
+        // --------------
+        // Test left square
+        // --------------
 
-    var shouldKeepDown = noReachedTheBottom && noCollidedWithAnotherSquare;
+        var leftSquareCollided = leftPartCurrentRowEnd == stoppedSquare.rowStart && leftPartCurrentColumnStart == stoppedSquare.columnStart;
 
-    if (shouldKeepDown) {
+        if (leftSquareCollided) noCollidedWithAnotherSquare = false;
 
-      // --------------
-      // Continues with the round
-      // --------------
+        // --------------
+        // Test right square
+        // --------------
 
-      (0, _movePartToBottom2.default)(part);
-    } else {
+        var rightSquareCollided = rightPartCurrentRowEnd == stoppedSquare.rowStart && rightPartCurrentColumnStart == stoppedSquare.columnStart;
 
-      // --------------
-      // Remove handlers for this part
-      // --------------
+        if (rightSquareCollided) noCollidedWithAnotherSquare = false;
 
-      right.removeEventListener('click', handlerToRight);
-      left.removeEventListener('click', handlerToLeft);
-      window.removeEventListener('keydown', keyboardHandlers);
+        // --------------
+        // Test top square
+        // --------------
 
-      // --------------
-      // Finish this round
-      // --------------
+        var topSquareCollided = topPartCurrentRowEnd == stoppedSquare.rowStart && topPartCurrentColumnStart == stoppedSquare.columnStart;
 
-      clearInterval(down);
+        if (topSquareCollided) noCollidedWithAnotherSquare = false;
+      });
 
-      // --------------
-      // Save position of all square
-      // --------------
+      // ---------------------------------------
+      // Check collision with game bottom
+      // ---------------------------------------
 
-      (0, _registerAllSquareEndPositions2.default)(part, allSquareEndPosition);
+      var currentRowEnd = (0, _getComputedStyleLine2.default)(part.bottom, 'gridRowEnd');
+      var noReachedTheBottom = currentRowEnd < 21;
 
-      // --------------
-      // Control score moment
-      // --------------
+      // ---------------------------------------
+      // Game engine
+      // ---------------------------------------
 
-      (0, _scorePoints2.default)(allSquareEndPosition);
+      var shouldKeepDown = noReachedTheBottom && noCollidedWithAnotherSquare;
 
-      // --------------
-      // Start new round
-      // --------------
+      if (shouldKeepDown) {
 
-      tetrisInit();
+        // --------------
+        // Continues with the round
+        // --------------
+
+        (0, _movePartToBottom2.default)(part);
+      } else {
+
+        // --------------
+        // Remove handlers for this part
+        // --------------
+
+        right.removeEventListener('click', handlerToRight);
+        left.removeEventListener('click', handlerToLeft);
+        window.removeEventListener('keydown', keyboardHandlers);
+
+        // --------------
+        // Finish this round
+        // --------------
+
+        clearInterval(down);
+
+        // --------------
+        // Save position of all square
+        // --------------
+
+        (0, _registerAllSquareEndPositions2.default)(part, allSquareEndPosition);
+
+        // --------------
+        // Control score moment
+        // --------------
+
+        (0, _scorePoints2.default)(allSquareEndPosition);
+
+        // --------------
+        // Start new round
+        // --------------
+
+        tetrisInit();
+      }
     }
   }, 300); // Round time
 };
@@ -1066,18 +1071,30 @@ var tetrisInit = function tetrisInit() {
 // Play with btn
 // --------------
 
-play.addEventListener('click', tetrisInit);
+var firstPlay = void 0;
+
+var togglePlay = function togglePlay() {
+
+  playState ? playState = false : playState = true;
+
+  if (!firstPlay) {
+    tetrisInit();
+    firstPlay = true;
+  }
+
+  play.classList.contains('btn--pause') ? play.classList.remove('btn--pause') : play.classList.add('btn--pause');
+};
+
+play.addEventListener('click', togglePlay);
 
 // --------------
 // Play with keyboard
 // --------------
 
-var keyboardPlay = function keyboardPlay(e) {
+window.addEventListener('keydown', function (e) {
   var pressEnter = e.which == 13 || e.keyCode == 13;
-  if (pressEnter) tetrisInit();
-};
-
-window.addEventListener('keydown', keyboardPlay);
+  if (pressEnter) togglePlay();
+});
 
 // --------------
 // Reset
