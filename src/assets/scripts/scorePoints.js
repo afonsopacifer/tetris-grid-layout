@@ -5,6 +5,13 @@ import getSquarePosition from './getSquarePosition';
 const scorePoints = squareList => {
 
   // --------------
+  // Get score elements
+  // --------------
+
+  const lines = document.getElementById('lines');
+  const score = document.getElementById('score');
+
+  // --------------
   // Iterating all lines
   // --------------
 
@@ -64,6 +71,18 @@ const scorePoints = squareList => {
         squareList.push(SquareNewEndPosition);
 
       });
+
+      // --------------
+      // Update score Lines
+      // --------------
+
+      lines.innerText =  parseInt(lines.innerText) + 1;
+
+      // --------------
+      // Update score Points
+      // --------------
+
+      score.innerText =  parseInt(score.innerText) + 100;
 
     }
 

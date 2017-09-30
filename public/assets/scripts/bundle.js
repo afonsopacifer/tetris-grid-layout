@@ -589,6 +589,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var scorePoints = function scorePoints(squareList) {
 
   // --------------
+  // Get score elements
+  // --------------
+
+  var lines = document.getElementById('lines');
+  var score = document.getElementById('score');
+
+  // --------------
   // Iterating all lines
   // --------------
 
@@ -647,6 +654,18 @@ var scorePoints = function scorePoints(squareList) {
         var SquareNewEndPosition = (0, _getSquarePosition2.default)(item);
         squareList.push(SquareNewEndPosition);
       });
+
+      // --------------
+      // Update score Lines
+      // --------------
+
+      lines.innerText = parseInt(lines.innerText) + 1;
+
+      // --------------
+      // Update score Points
+      // --------------
+
+      score.innerText = parseInt(score.innerText) + 100;
     }
   }
 };
