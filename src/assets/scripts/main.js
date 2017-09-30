@@ -20,6 +20,7 @@ import movePartToLeft from './movePartToLeft';
 import getSquarePosition from './getSquarePosition';
 import registerAllSquareEndPositions from './registerAllSquareEndPositions';
 import getComputedStyleLine from './getComputedStyleLine';
+import scorePoints from './scorePoints';
 
 // ---------------------------------------
 // Get elements
@@ -188,6 +189,12 @@ const tetrisInit = () => {
       // --------------
 
       registerAllSquareEndPositions(part, allSquareEndPosition)
+
+      // --------------
+      // Control score moment
+      // --------------
+
+      scorePoints(allSquareEndPosition);
 
       // --------------
       // Start new round
