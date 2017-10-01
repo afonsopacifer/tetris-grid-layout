@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/assets/scripts/main.js',
+  entry: './src/assets/scripts/tetris.js',
   output: {
     path: path.resolve('public/assets/scripts/'),
     filename: 'bundle.js'
