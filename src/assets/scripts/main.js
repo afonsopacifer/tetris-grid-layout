@@ -1,65 +1,55 @@
 // ---------------------------------------
-// Import all parts profiles
+// Parts profiles
 // ---------------------------------------
 
-import tPart from './parts/tPart';
-import iPart from './parts/iPart';
-import jPart from './parts/jPart';
-import lPart from './parts/lPart';
-import oPart from './parts/oPart';
-import sPart from './parts/sPart';
-import zPart from './parts/zPart';
+import allPossibleParts from './parts/allPossibleParts'
 
 // ---------------------------------------
-// Import all helpers
+// Controls
+// ---------------------------------------
+
+import playControlInit from './controls/play'
+import resetControlInit from './controls/reset'
+
+// ---------------------------------------
+// Movements
 // ---------------------------------------
 
 import movePartToBottom from './movements/parts/movePartToBottom';
 import movePartToRight from './movements/parts/movePartToRight';
 import movePartToLeft from './movements/parts/movePartToLeft';
-import getSquarePosition from './utils/squares/getSquarePosition';
+
+// ---------------------------------------
+// Utils
+// ---------------------------------------
+
 import registerAllSquareEndPositions from './utils/parts/registerAllSquareEndPositions';
 import getComputedStyleLine from './utils/squares/getComputedStyleLine';
+
+// ---------------------------------------
+// Score
+// ---------------------------------------
+
 import scorePoints from './scorePoints';
 
 // ---------------------------------------
-// Get elements
+// Canvas
 // ---------------------------------------
 
 const canvas = document.getElementById('canvas');
-const right = document.getElementById('rightBtn');
-const left = document.getElementById('leftBtn');
-const play = document.getElementById('playBtn');
-const reset = document.getElementById('resetBtn');
 
 // ---------------------------------------
-// List possible parts
+// States
 // ---------------------------------------
 
-const possibleParts = [
-  tPart,
-  iPart,
-  jPart,
-  lPart,
-  oPart,
-  sPart,
-  zPart
-];
-
-// ---------------------------------------
-// State of all stopped square
-// ---------------------------------------
-
-let allSquareEndPosition = [];
+const states = {
+  allSquareEndPosition: [],
+  play: false
+}
 
 // ---------------------------------------
 // The tetris game
 // ---------------------------------------
-
-
-
-let playState;
-
 
 const tetrisInit = () => {
 
@@ -69,37 +59,25 @@ const tetrisInit = () => {
 
   const randomIndex = Math.floor(Math.random() * 7);
 
-  const part = possibleParts[randomIndex]()
+  const part = allPossibleParts[randomIndex]();
 
   canvas.appendChild(part.left);
   canvas.appendChild(part.top);
   canvas.appendChild(part.bottom);
   canvas.appendChild(part.right);
 
-  // ---------------------------------------
-  // Add event handlers
-  // ---------------------------------------
-
-  // --------------
-  // Btn handlers
-  // --------------
-
-  const handlerToRight = () => movePartToRight(part);
-  const handlerToLeft = () => movePartToLeft(part);
-
-  right.addEventListener('click', handlerToRight);
-  left.addEventListener('click', handlerToLeft);
-
   // --------------
   // Keyboard handlers
   // --------------
 
   const keyboardHandlers = (e) => {
+
     const pressRight = e.which == 39 || e.keyCode == 39;
     const pressLeft = e.which == 37 || e.keyCode == 37;
 
-    if (pressRight) handlerToRight();
-    if (pressLeft) handlerToLeft();
+    if (pressRight) movePartToRight(part);
+    if (pressLeft) movePartToLeft(part);
+
   }
 
   window.addEventListener('keydown', keyboardHandlers);
@@ -110,7 +88,7 @@ const tetrisInit = () => {
 
   const down = setInterval(() => {
 
-    if(playState) {
+    if(states.play) {
       // ---------------------------------------
       // Check collision with all stopped square
       // todo: Refactor and implement left & right collisions
@@ -138,7 +116,7 @@ const tetrisInit = () => {
       // Test collision with all stopped square
       // --------------
 
-      allSquareEndPosition.forEach((stoppedSquare) => {
+      states.allSquareEndPosition.forEach((stoppedSquare) => {
 
         // --------------
         // Test bottom square
@@ -201,8 +179,6 @@ const tetrisInit = () => {
         // Remove handlers for this part
         // --------------
 
-        right.removeEventListener('click', handlerToRight);
-        left.removeEventListener('click', handlerToLeft);
         window.removeEventListener('keydown', keyboardHandlers);
 
         // --------------
@@ -215,13 +191,13 @@ const tetrisInit = () => {
         // Save position of all square
         // --------------
 
-        registerAllSquareEndPositions(part, allSquareEndPosition)
+        registerAllSquareEndPositions(part, states.allSquareEndPosition)
 
         // --------------
         // Control score moment
         // --------------
 
-        scorePoints(allSquareEndPosition);
+        scorePoints(states.allSquareEndPosition);
 
         // --------------
         // Start new round
@@ -235,47 +211,8 @@ const tetrisInit = () => {
 }
 
 // ---------------------------------------
-// Basic controls
+// Controls
 // ---------------------------------------
 
-// --------------
-// Play with btn
-// --------------
-
-let firstPlay;
-
-const togglePlay = () => {
-
-  playState
-  ? playState = false
-  : playState = true
-
-  if(!firstPlay) {
-    tetrisInit();
-    firstPlay = true;
-  }
-
-  play.classList.contains('btn--pause')
-  ? play.classList.remove('btn--pause')
-  : play.classList.add('btn--pause')
-
-}
-
-play.addEventListener('click', togglePlay);
-
-// --------------
-// Play with keyboard
-// --------------
-
-window.addEventListener('keydown', (e) => {
-  const pressEnter = e.which == 13 || e.keyCode == 13;
-  if (pressEnter) togglePlay();
-});
-
-// --------------
-// Reset
-// --------------
-
-reset.addEventListener('click', () => {
-  location.reload();
-});
+playControlInit(states, tetrisInit);
+resetControlInit();
