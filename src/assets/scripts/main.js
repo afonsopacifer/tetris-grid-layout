@@ -24,7 +24,6 @@ import movePartToLeft from './movements/parts/movePartToLeft';
 // ---------------------------------------
 
 import registerAllSquareEndPositions from './utils/parts/registerAllSquareEndPositions';
-import getComputedStyleLine from './utils/squares/getComputedStyleLine';
 
 // ---------------------------------------
 // Score
@@ -32,6 +31,13 @@ import getComputedStyleLine from './utils/squares/getComputedStyleLine';
 
 import scorePoints from './scorePoints';
 
+// ---------------------------------------
+// Collisions
+// ---------------------------------------
+
+import collisionsWithStoppedSquaresBelow from './collisions/collisionsWithStoppedSquaresBelow';
+
+import collisionWithCavasBottom from './collisions/collisionWithCavasBottom';
 // ---------------------------------------
 // Canvas
 // ---------------------------------------
@@ -89,81 +95,24 @@ const tetrisInit = () => {
   const down = setInterval(() => {
 
     if(states.play) {
-      // ---------------------------------------
-      // Check collision with all stopped square
-      // todo: Refactor and implement left & right collisions
-      // ---------------------------------------
-
-      let noCollidedWithAnotherSquare = true;
-
-      // --------------
-      // Get all part square positions for test
-      // --------------
-
-      const bottomPartCurrentRowEnd = getComputedStyleLine(part.bottom, 'gridRowEnd');
-      const bottomPartCurrentColumnStart = getComputedStyleLine(part.bottom, 'gridColumnStart');
-
-      const leftPartCurrentRowEnd = getComputedStyleLine(part.left, 'gridRowEnd');
-      const leftPartCurrentColumnStart = getComputedStyleLine(part.left, 'gridColumnStart');
-
-      const rightPartCurrentRowEnd = getComputedStyleLine(part.right, 'gridRowEnd');
-      const rightPartCurrentColumnStart = getComputedStyleLine(part.right, 'gridColumnStart');
-
-      const topPartCurrentRowEnd = getComputedStyleLine(part.top, 'gridRowEnd');
-      const topPartCurrentColumnStart = getComputedStyleLine(part.top, 'gridColumnStart');
-
-      // --------------
-      // Test collision with all stopped square
-      // --------------
-
-      states.allSquareEndPosition.forEach((stoppedSquare) => {
-
-        // --------------
-        // Test bottom square
-        // --------------
-
-        const bottomSquareCollided = bottomPartCurrentRowEnd == stoppedSquare.rowStart && bottomPartCurrentColumnStart == stoppedSquare.columnStart;
-
-        if (bottomSquareCollided) noCollidedWithAnotherSquare = false;
-
-        // --------------
-        // Test left square
-        // --------------
-
-        const leftSquareCollided = leftPartCurrentRowEnd == stoppedSquare.rowStart && leftPartCurrentColumnStart == stoppedSquare.columnStart;
-
-        if (leftSquareCollided) noCollidedWithAnotherSquare = false;
-
-        // --------------
-        // Test right square
-        // --------------
-
-        const rightSquareCollided = rightPartCurrentRowEnd == stoppedSquare.rowStart && rightPartCurrentColumnStart == stoppedSquare.columnStart;
-
-        if (rightSquareCollided) noCollidedWithAnotherSquare = false;
-
-        // --------------
-        // Test top square
-        // --------------
-
-        const topSquareCollided = topPartCurrentRowEnd == stoppedSquare.rowStart && topPartCurrentColumnStart == stoppedSquare.columnStart;
-
-        if (topSquareCollided) noCollidedWithAnotherSquare = false;
-
-      })
 
       // ---------------------------------------
-      // Check collision with game bottom
+      // Test collision of all squares in movement with all stopped squares
       // ---------------------------------------
 
-      const currentRowEnd = getComputedStyleLine(part.bottom, 'gridRowEnd');
-      const noReachedTheBottom = currentRowEnd < 21;
+      const noCollidedWithAnotherSquareBelow = collisionsWithStoppedSquaresBelow(part, states.allSquareEndPosition);
+
+      // ---------------------------------------
+      // Test collision with game bottom
+      // ---------------------------------------
+
+      const noReachedTheBottom = collisionWithCavasBottom(part.bottom);
 
       // ---------------------------------------
       // Game engine
       // ---------------------------------------
 
-      const shouldKeepDown = noReachedTheBottom && noCollidedWithAnotherSquare;
+      const shouldKeepDown = noReachedTheBottom && noCollidedWithAnotherSquareBelow;
 
       if (shouldKeepDown) {
 

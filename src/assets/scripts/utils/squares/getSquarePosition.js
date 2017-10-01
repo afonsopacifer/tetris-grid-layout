@@ -1,11 +1,17 @@
+import getComputedStyleLine from './getComputedStyleLine'
+
 const getSquarePosition = (square) => {
 
-  const columnStartValue = parseInt(window.getComputedStyle(square).gridColumnStart);
-  const rowStartValue = parseInt(window.getComputedStyle(square).gridRowStart);
+  const columnStartValue = getComputedStyleLine(square, 'gridColumnStart');
+  const columnEndValue = getComputedStyleLine(square, 'gridColumnEnd');
+  const rowStartValue = getComputedStyleLine(square, 'gridRowStart');
+  const rowEndValue = getComputedStyleLine(square, 'gridRowEnd');
 
   return {
     columnStart: columnStartValue,
-    rowStart: rowStartValue
+    columnEnd: columnEndValue,
+    rowStart: rowStartValue,
+    rowEnd: rowEndValue,
   };
 
 }
