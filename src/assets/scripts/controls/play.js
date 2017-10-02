@@ -35,7 +35,7 @@ const playControlInit = (state, action) => {
   // --------------
 
   window.addEventListener('keydown', (e) => {
-    const pressEnter = e.which == 13 || e.keyCode == 13;
+    const pressEnter = e.which == 32 || e.keyCode == 32;
     if (pressEnter) togglePlay();
   });
 

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 26);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -262,6 +262,51 @@ exports.default = collisionsWithStoppedSquaresBelow;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var helperControlInit = function helperControlInit(state) {
+
+  var helperBtn = document.getElementById('helperBtn');
+  var closeBtn = document.getElementById('closeHelperBtn');
+  var helperBox = document.getElementById('helperContainer');
+
+  var helperBoxState = void 0;
+
+  var toggleHelperBox = function toggleHelperBox() {
+    if (helperBoxState) {
+
+      helperBox.style.display = 'none';
+      state.play = true;
+      helperBoxState = false;
+    } else {
+
+      state.play = false;
+      helperBox.style.display = 'flex';
+      helperBoxState = true;
+    }
+  };
+
+  helperBtn.addEventListener('click', toggleHelperBox);
+  closeBtn.addEventListener('click', toggleHelperBox);
+
+  var helperKeyboardControl = function helperKeyboardControl(e) {
+    var pressH = e.which == 72 || e.keyCode == 72;
+    if (pressH) toggleHelperBox();
+  };
+
+  window.addEventListener('keydown', helperKeyboardControl);
+};
+
+exports.default = helperControlInit;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var playControlInit = function playControlInit(state, action) {
 
   var playBtn = document.getElementById('playBtn');
@@ -298,7 +343,7 @@ var playControlInit = function playControlInit(state, action) {
   // --------------
 
   window.addEventListener('keydown', function (e) {
-    var pressEnter = e.which == 13 || e.keyCode == 13;
+    var pressEnter = e.which == 32 || e.keyCode == 32;
     if (pressEnter) togglePlay();
   });
 };
@@ -306,7 +351,7 @@ var playControlInit = function playControlInit(state, action) {
 exports.default = playControlInit;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -335,7 +380,7 @@ var resetControlInit = function resetControlInit() {
 exports.default = resetControlInit;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -374,7 +419,7 @@ var soundControlInit = function soundControlInit() {
 exports.default = soundControlInit;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -401,7 +446,7 @@ var movePartToBottom = function movePartToBottom(part) {
 exports.default = movePartToBottom;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -411,7 +456,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToLeft = __webpack_require__(16);
+var _moveToLeft = __webpack_require__(17);
 
 var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
 
@@ -433,7 +478,7 @@ var movePartToLeft = function movePartToLeft(part) {
 exports.default = movePartToLeft;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -443,7 +488,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToRight = __webpack_require__(17);
+var _moveToRight = __webpack_require__(18);
 
 var _moveToRight2 = _interopRequireDefault(_moveToRight);
 
@@ -465,7 +510,7 @@ var movePartToRight = function movePartToRight(part) {
 exports.default = movePartToRight;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -576,7 +621,7 @@ var scorePoints = function scorePoints(squareList) {
 exports.default = scorePoints;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -595,7 +640,7 @@ var appendPart = function appendPart(part, parent) {
 exports.default = appendPart;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -605,31 +650,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tPart = __webpack_require__(23);
+var _tPart = __webpack_require__(24);
 
 var _tPart2 = _interopRequireDefault(_tPart);
 
-var _iPart = __webpack_require__(18);
+var _iPart = __webpack_require__(19);
 
 var _iPart2 = _interopRequireDefault(_iPart);
 
-var _jPart = __webpack_require__(19);
+var _jPart = __webpack_require__(20);
 
 var _jPart2 = _interopRequireDefault(_jPart);
 
-var _lPart = __webpack_require__(20);
+var _lPart = __webpack_require__(21);
 
 var _lPart2 = _interopRequireDefault(_lPart);
 
-var _oPart = __webpack_require__(21);
+var _oPart = __webpack_require__(22);
 
 var _oPart2 = _interopRequireDefault(_oPart);
 
-var _sPart = __webpack_require__(22);
+var _sPart = __webpack_require__(23);
 
 var _sPart2 = _interopRequireDefault(_sPart);
 
-var _zPart = __webpack_require__(24);
+var _zPart = __webpack_require__(25);
 
 var _zPart2 = _interopRequireDefault(_zPart);
 
@@ -647,7 +692,7 @@ var newRandomPart = function newRandomPart() {
 exports.default = newRandomPart;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -679,7 +724,7 @@ var registerAllSquareEndPositions = function registerAllSquareEndPositions(part,
 exports.default = registerAllSquareEndPositions;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -702,7 +747,7 @@ var moveToLeft = function moveToLeft(element) {
 exports.default = moveToLeft;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -730,7 +775,7 @@ var moveToRight = function moveToRight(element) {
 exports.default = moveToRight;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -787,7 +832,7 @@ var iPart = function iPart() {
 exports.default = iPart;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -844,7 +889,7 @@ var jPart = function jPart() {
 exports.default = jPart;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -901,7 +946,7 @@ var lPart = function lPart() {
 exports.default = lPart;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -958,7 +1003,7 @@ var oPart = function oPart() {
 exports.default = oPart;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1015,7 +1060,7 @@ var sPart = function sPart() {
 exports.default = sPart;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1072,7 +1117,7 @@ var tPart = function tPart() {
 exports.default = tPart;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1129,33 +1174,33 @@ var zPart = function zPart() {
 exports.default = zPart;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _newRandomPart = __webpack_require__(14);
+var _newRandomPart = __webpack_require__(15);
 
 var _newRandomPart2 = _interopRequireDefault(_newRandomPart);
 
-var _appendPart = __webpack_require__(13);
+var _appendPart = __webpack_require__(14);
 
 var _appendPart2 = _interopRequireDefault(_appendPart);
 
-var _registerAllSquareEndPositions = __webpack_require__(15);
+var _registerAllSquareEndPositions = __webpack_require__(16);
 
 var _registerAllSquareEndPositions2 = _interopRequireDefault(_registerAllSquareEndPositions);
 
-var _movePartToBottom = __webpack_require__(9);
+var _movePartToBottom = __webpack_require__(10);
 
 var _movePartToBottom2 = _interopRequireDefault(_movePartToBottom);
 
-var _movePartToRight = __webpack_require__(11);
+var _movePartToRight = __webpack_require__(12);
 
 var _movePartToRight2 = _interopRequireDefault(_movePartToRight);
 
-var _movePartToLeft = __webpack_require__(10);
+var _movePartToLeft = __webpack_require__(11);
 
 var _movePartToLeft2 = _interopRequireDefault(_movePartToLeft);
 
@@ -1167,23 +1212,23 @@ var _collisionWithCavasBottom = __webpack_require__(4);
 
 var _collisionWithCavasBottom2 = _interopRequireDefault(_collisionWithCavasBottom);
 
-var _scorePoints = __webpack_require__(12);
+var _scorePoints = __webpack_require__(13);
 
 var _scorePoints2 = _interopRequireDefault(_scorePoints);
 
-var _play = __webpack_require__(6);
+var _play = __webpack_require__(7);
 
 var _play2 = _interopRequireDefault(_play);
 
-var _reset = __webpack_require__(7);
+var _reset = __webpack_require__(8);
 
 var _reset2 = _interopRequireDefault(_reset);
 
-var _sound = __webpack_require__(8);
+var _sound = __webpack_require__(9);
 
 var _sound2 = _interopRequireDefault(_sound);
 
-var _helper = __webpack_require__(26);
+var _helper = __webpack_require__(6);
 
 var _helper2 = _interopRequireDefault(_helper);
 
@@ -1295,51 +1340,6 @@ function tetrisInit() {
     } // End Play validation
   }, states.movementSpeed); // End down()
 } // End tetrisInit()
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var helperControlInit = function helperControlInit(state) {
-
-  var helperBtn = document.getElementById('helperBtn');
-  var closeBtn = document.getElementById('closeHelperBtn');
-  var helperBox = document.getElementById('helperContainer');
-
-  var helperBoxState = void 0;
-
-  var toggleHelperBox = function toggleHelperBox() {
-    if (helperBoxState) {
-
-      helperBox.style.display = 'none';
-      state.play = true;
-      helperBoxState = false;
-    } else {
-
-      state.play = false;
-      helperBox.style.display = 'flex';
-      helperBoxState = true;
-    }
-  };
-
-  helperBtn.addEventListener('click', toggleHelperBox);
-  closeBtn.addEventListener('click', toggleHelperBox);
-
-  var helperKeyboardControl = function helperKeyboardControl(e) {
-    var pressH = e.which == 72 || e.keyCode == 72;
-    if (pressH) toggleHelperBox();
-  };
-
-  window.addEventListener('keydown', helperKeyboardControl);
-};
-
-exports.default = helperControlInit;
 
 /***/ })
 /******/ ]);
