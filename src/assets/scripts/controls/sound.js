@@ -1,7 +1,9 @@
 const soundControlInit = () => {
 
   const soundBtn = document.getElementById('soundBtn');
+
   const backgroundSong = new Audio('./assets/sounds/original-tetris-soundtrack.mp3');
+  backgroundSong.loop = true;
 
   let isPlaying = false;
 

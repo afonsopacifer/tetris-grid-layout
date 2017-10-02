@@ -336,7 +336,9 @@ Object.defineProperty(exports, "__esModule", {
 var soundControlInit = function soundControlInit() {
 
   var soundBtn = document.getElementById('soundBtn');
+
   var backgroundSong = new Audio('./assets/sounds/original-tetris-soundtrack.mp3');
+  backgroundSong.loop = true;
 
   var isPlaying = false;
 
