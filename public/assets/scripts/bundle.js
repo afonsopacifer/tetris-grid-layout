@@ -1183,6 +1183,10 @@ var _sound = __webpack_require__(8);
 
 var _sound2 = _interopRequireDefault(_sound);
 
+var _helper = __webpack_require__(26);
+
+var _helper2 = _interopRequireDefault(_helper);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // ---------------------------------------
@@ -1207,6 +1211,7 @@ var states = {
 };(0, _play2.default)(states, tetrisInit);
 (0, _reset2.default)();
 (0, _sound2.default)();
+(0, _helper2.default)(states);
 
 // ---------------------------------------
 // Start game
@@ -1290,6 +1295,51 @@ function tetrisInit() {
     } // End Play validation
   }, states.movementSpeed); // End down()
 } // End tetrisInit()
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var helperControlInit = function helperControlInit(state) {
+
+  var helperBtn = document.getElementById('helperBtn');
+  var closeBtn = document.getElementById('closeHelperBtn');
+  var helperBox = document.getElementById('helperContainer');
+
+  var helperBoxState = void 0;
+
+  var toggleHelperBox = function toggleHelperBox() {
+    if (helperBoxState) {
+
+      helperBox.style.display = 'none';
+      state.play = true;
+      helperBoxState = false;
+    } else {
+
+      state.play = false;
+      helperBox.style.display = 'flex';
+      helperBoxState = true;
+    }
+  };
+
+  helperBtn.addEventListener('click', toggleHelperBox);
+  closeBtn.addEventListener('click', toggleHelperBox);
+
+  var helperKeyboardControl = function helperKeyboardControl(e) {
+    var pressH = e.which == 72 || e.keyCode == 72;
+    if (pressH) toggleHelperBox();
+  };
+
+  window.addEventListener('keydown', helperKeyboardControl);
+};
+
+exports.default = helperControlInit;
 
 /***/ })
 /******/ ]);

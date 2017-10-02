@@ -10,6 +10,7 @@ import scorePoints from './scorePoints';
 import playControlInit from './controls/play';
 import resetControlInit from './controls/reset';
 import soundControlInit from  './controls/sound';
+import helperControlInit from  './controls/helper';
 
 // ---------------------------------------
 // DOM elements
@@ -34,6 +35,7 @@ const states = {
 playControlInit(states, tetrisInit);
 resetControlInit();
 soundControlInit();
+helperControlInit(states);
 
 // ---------------------------------------
 // Start game

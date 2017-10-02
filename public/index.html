@@ -26,7 +26,7 @@
       </div>
 
       <div class="game">
-        <div id="canvas"></div>
+        <div class="canvas" id="canvas"></div>
       </div>
 
       <div class="monitors">
@@ -47,12 +47,21 @@
         </div>
       </div>
 
-      <!-- <div id="helperBox">
-        <p class="paragraph">
-          <button id="closeHelperBtn" class="btn btn--close"></button>
-          How to play
-        </p>
-      </div> -->
+      <div class="helper-container" id="helperContainer">
+        <div class="helper-box">
+          <button class="helper-box__btn btn btn--close" id="closeHelperBtn"></button>
+          <span class="helper-box__title">Keyboard commands:</span>
+          <ul class="helper-box__list">
+            <li class="helper-box__list__item">Press SPACE for pause or play.</li>
+            <li class="helper-box__list__item">Press LEFT ARROW to move a part to left.</li>
+            <li class="helper-box__list__item">Press RIGHT ARROW to move a part to right.</li>
+            <li class="helper-box__list__item">Press TOP ARROW to rotate the part.</li>
+            <li class="helper-box__list__item">Press BOTTOM ARROW to speed down a part.</li>
+            <li class="helper-box__list__item">Press H for view Help.</li>
+            <li class="helper-box__list__item">Press ESC for restart the game.</li>
+          </ul>
+        </div>
+      </div>
 
     </div>
 

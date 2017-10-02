@@ -1,3 +1,6 @@
+/* Page
+============================= */
+
 html, body {
   height: 100%;
 }
@@ -30,6 +33,9 @@ body {
   font-size: 20px;
 }
 
+/* Layout
+============================= */
+
 .container {
   width: 100%;
   max-width: 900px;
@@ -39,9 +45,65 @@ body {
   justify-content: space-between;
 }
 
+/* Controls
+============================= */
+
 .controls {
   width: 80px;
 }
+
+/* Game
+============================= */
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas {
+  box-sizing: content-box;
+  background-color: #c4cfa1;
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(20, 30px);
+  width: 100%;
+  max-width: 300px;
+  border: 5px solid #6b7353;
+}
+
+/* Monitors
+============================= */
+
+.monitors {
+
+}
+
+.monitor {
+  box-sizing: border-box;
+  border: 5px solid #6b7353;
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px;
+  background-color: #c4cfa1;
+  color: #414141;
+  margin-bottom: 10px;
+}
+
+.monitor__name {
+  font-size: 28px;
+  display: block;
+  text-align: right;
+}
+
+.monitor__count {
+  font-size: 32px;
+  display: block;
+  text-align: right;
+  margin-top: 20px;
+}
+
+/* Btn
+============================= */
 
 .btn {
   border: 5px solid #6b7353;
@@ -81,45 +143,60 @@ body {
   background-image: url('../icons/close.svg');
 }
 
-.game {
-  display: flex;
+/* Helper
+============================= */
+
+.helper-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: rgba(0,0,0,.5);
+  width: 100vw;
+  height: 100vh;
   justify-content: center;
   align-items: center;
 }
 
-#canvas {
-  box-sizing: content-box;
-  background-color: #c4cfa1;
-  display: grid;
-  grid-template-columns: repeat(10, 30px);
-  grid-template-rows: repeat(20, 30px);
+.helper-box {
+  border: 5px solid #6b7353;
   width: 100%;
-  max-width: 300px;
-  border: 5px solid #6b7353;
-}
-
-.monitor {
-  box-sizing: border-box;
-  border: 5px solid #6b7353;
-  font-family: 'Press Start 2P', cursive;
-  padding: 10px;
-  background-color: #c4cfa1;
+  max-width: 600px;
   color: #414141;
-  margin-bottom: 10px;
+  background-color: #c4cfa1;
+  padding: 10px;
+  font-family: 'Press Start 2P', cursive;
+  position: relative;
+  font-size: 12px;
 }
 
-.monitor__name {
-  font-size: 28px;
-  display: block;
-  text-align: right;
+.helper-box__title {
+  font-size: 14px;
+  margin: 10px 0;
+  display: inline-block;
+  text-transform: uppercase;
 }
 
-.monitor__count {
-  font-size: 32px;
-  display: block;
-  text-align: right;
-  margin-top: 20px;
+.helper-box__btn {
+  position: absolute;
+  top: -25px;
+  right: -25px;
 }
+
+.helper-box__list {
+  padding-left: 0;
+  margin: 0;
+}
+
+.helper-box__list__item {
+  list-style: none;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+/* Parts
+============================= */
 
 .part {
   border: 1px solid #6b7353;
