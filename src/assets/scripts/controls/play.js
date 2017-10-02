@@ -1,25 +1,32 @@
-const playControlInit = (state, onlyFirstAction) => {
+const playControlInit = (state, action) => {
 
   const playBtn = document.getElementById('playBtn');
+  const body = document.body;
 
   let firstPlay;
 
   const togglePlay = () => {
 
-    state.play
-    ? state.play = false
-    : state.play = true
-
     if(!firstPlay) {
-      onlyFirstAction();
+      action();
       firstPlay = true;
     }
 
-    playBtn.classList.contains('btn--pause')
-    ? playBtn.classList.remove('btn--pause')
-    : playBtn.classList.add('btn--pause')
+    if(state.play) {
+      state.play = false;
+      playBtn.classList.remove('btn--pause');
+      body.classList.add('paused-state');
+    } else {
+      state.play = true;
+      playBtn.classList.add('btn--pause');
+      body.classList.remove('paused-state');
+    }
 
   }
+
+  // --------------
+  // Play with btn
+  // --------------
 
   playBtn.addEventListener('click', togglePlay);
 

@@ -13,18 +13,33 @@ body {
   box-sizing: border-box;
 }
 
+.paused-state::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: rgba(0,0,0,.5);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: 'PAUSED';
+  color: #fff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+}
+
 .container {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  /*border: 1px dashed red;*/
   display: flex;
   padding: 10px;
   justify-content: space-between;
 }
 
 .controls {
-  /*border: 1px dashed purple;*/
   width: 80px;
 }
 
@@ -34,33 +49,36 @@ body {
   height: 50px;
   background-color: #c4cfa1;
   margin-bottom: 10px;
-}
-
-.btn svg {
-  fill: #414141;
-}
-.btn--play {
-  background-image: url('../icons/play.svg');
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.btn--play {
+  background-image: url('../icons/play.svg');
 }
 
 .btn--pause {
   background-image: url('../icons/pause.svg');
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .btn--off {
   background-image: url('../icons/sound-off.svg');
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .btn--on {
   background-image: url('../icons/sound-on.svg');
-  background-position: center;
-  background-repeat: no-repeat;
+}
+
+.btn--reset {
+  background-image: url('../icons/reset.svg');
+}
+
+.btn--helper {
+  background-image: url('../icons/helper.svg');
+}
+
+.btn--close {
+  background-image: url('../icons/close.svg');
 }
 
 .game {
@@ -80,7 +98,7 @@ body {
   border: 5px solid #6b7353;
 }
 
-.box {
+.monitor {
   box-sizing: border-box;
   border: 5px solid #6b7353;
   font-family: 'Press Start 2P', cursive;
@@ -90,13 +108,13 @@ body {
   margin-bottom: 10px;
 }
 
-.box__name {
+.monitor__name {
   font-size: 28px;
   display: block;
   text-align: right;
 }
 
-.box__count {
+.monitor__count {
   font-size: 32px;
   display: block;
   text-align: right;
@@ -104,7 +122,6 @@ body {
 }
 
 .part {
-  box-sizing: border-box;
   border: 1px solid #6b7353;
 }
 

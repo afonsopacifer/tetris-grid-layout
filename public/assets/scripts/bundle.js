@@ -262,23 +262,34 @@ exports.default = collisionsWithStoppedSquaresBelow;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var playControlInit = function playControlInit(state, onlyFirstAction) {
+var playControlInit = function playControlInit(state, action) {
 
   var playBtn = document.getElementById('playBtn');
+  var body = document.body;
 
   var firstPlay = void 0;
 
   var togglePlay = function togglePlay() {
 
-    state.play ? state.play = false : state.play = true;
-
     if (!firstPlay) {
-      onlyFirstAction();
+      action();
       firstPlay = true;
     }
 
-    playBtn.classList.contains('btn--pause') ? playBtn.classList.remove('btn--pause') : playBtn.classList.add('btn--pause');
+    if (state.play) {
+      state.play = false;
+      playBtn.classList.remove('btn--pause');
+      body.classList.add('paused-state');
+    } else {
+      state.play = true;
+      playBtn.classList.add('btn--pause');
+      body.classList.remove('paused-state');
+    }
   };
+
+  // --------------
+  // Play with btn
+  // --------------
 
   playBtn.addEventListener('click', togglePlay);
 
