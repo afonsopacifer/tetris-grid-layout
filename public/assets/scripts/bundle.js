@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -306,17 +306,62 @@ Object.defineProperty(exports, "__esModule", {
 });
 var resetControlInit = function resetControlInit() {
 
-  var reset = document.getElementById('resetBtn');
-
-  reset.addEventListener('click', function () {
+  var reset = function reset() {
     location.reload();
-  });
+  };
+
+  var resetBtn = document.getElementById('resetBtn');
+  resetBtn.addEventListener('click', reset);
+
+  var resetControl = function resetControl(e) {
+    var pressEsc = e.which == 27 || e.keyCode == 27;
+    if (pressEsc) reset();
+  };
+
+  window.addEventListener('keydown', resetControl);
 };
 
 exports.default = resetControlInit;
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var soundControlInit = function soundControlInit() {
+
+  var soundBtn = document.getElementById('soundBtn');
+  var backgroundSong = new Audio('./assets/sounds/original-tetris-soundtrack.mp3');
+
+  var isPlaying = false;
+
+  var toggleSound = function toggleSound() {
+
+    if (isPlaying) {
+
+      soundBtn.classList.remove('btn--on');
+      backgroundSong.pause();
+      isPlaying = false;
+    } else {
+
+      soundBtn.classList.add('btn--on');
+      backgroundSong.play();
+      isPlaying = true;
+    }
+  };
+
+  soundBtn.addEventListener('click', toggleSound);
+};
+
+exports.default = soundControlInit;
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -343,7 +388,7 @@ var movePartToBottom = function movePartToBottom(part) {
 exports.default = movePartToBottom;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -353,7 +398,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToLeft = __webpack_require__(15);
+var _moveToLeft = __webpack_require__(16);
 
 var _moveToLeft2 = _interopRequireDefault(_moveToLeft);
 
@@ -375,7 +420,7 @@ var movePartToLeft = function movePartToLeft(part) {
 exports.default = movePartToLeft;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -385,7 +430,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moveToRight = __webpack_require__(16);
+var _moveToRight = __webpack_require__(17);
 
 var _moveToRight2 = _interopRequireDefault(_moveToRight);
 
@@ -407,7 +452,7 @@ var movePartToRight = function movePartToRight(part) {
 exports.default = movePartToRight;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -518,7 +563,7 @@ var scorePoints = function scorePoints(squareList) {
 exports.default = scorePoints;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -537,7 +582,7 @@ var appendPart = function appendPart(part, parent) {
 exports.default = appendPart;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -547,31 +592,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tPart = __webpack_require__(22);
+var _tPart = __webpack_require__(23);
 
 var _tPart2 = _interopRequireDefault(_tPart);
 
-var _iPart = __webpack_require__(17);
+var _iPart = __webpack_require__(18);
 
 var _iPart2 = _interopRequireDefault(_iPart);
 
-var _jPart = __webpack_require__(18);
+var _jPart = __webpack_require__(19);
 
 var _jPart2 = _interopRequireDefault(_jPart);
 
-var _lPart = __webpack_require__(19);
+var _lPart = __webpack_require__(20);
 
 var _lPart2 = _interopRequireDefault(_lPart);
 
-var _oPart = __webpack_require__(20);
+var _oPart = __webpack_require__(21);
 
 var _oPart2 = _interopRequireDefault(_oPart);
 
-var _sPart = __webpack_require__(21);
+var _sPart = __webpack_require__(22);
 
 var _sPart2 = _interopRequireDefault(_sPart);
 
-var _zPart = __webpack_require__(23);
+var _zPart = __webpack_require__(24);
 
 var _zPart2 = _interopRequireDefault(_zPart);
 
@@ -589,7 +634,7 @@ var newRandomPart = function newRandomPart() {
 exports.default = newRandomPart;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -621,7 +666,7 @@ var registerAllSquareEndPositions = function registerAllSquareEndPositions(part,
 exports.default = registerAllSquareEndPositions;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -644,7 +689,7 @@ var moveToLeft = function moveToLeft(element) {
 exports.default = moveToLeft;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -672,7 +717,7 @@ var moveToRight = function moveToRight(element) {
 exports.default = moveToRight;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -729,7 +774,7 @@ var iPart = function iPart() {
 exports.default = iPart;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -786,7 +831,7 @@ var jPart = function jPart() {
 exports.default = jPart;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -843,7 +888,7 @@ var lPart = function lPart() {
 exports.default = lPart;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -900,7 +945,7 @@ var oPart = function oPart() {
 exports.default = oPart;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -957,7 +1002,7 @@ var sPart = function sPart() {
 exports.default = sPart;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1014,7 +1059,7 @@ var tPart = function tPart() {
 exports.default = tPart;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1071,33 +1116,33 @@ var zPart = function zPart() {
 exports.default = zPart;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _newRandomPart = __webpack_require__(13);
+var _newRandomPart = __webpack_require__(14);
 
 var _newRandomPart2 = _interopRequireDefault(_newRandomPart);
 
-var _appendPart = __webpack_require__(12);
+var _appendPart = __webpack_require__(13);
 
 var _appendPart2 = _interopRequireDefault(_appendPart);
 
-var _registerAllSquareEndPositions = __webpack_require__(14);
+var _registerAllSquareEndPositions = __webpack_require__(15);
 
 var _registerAllSquareEndPositions2 = _interopRequireDefault(_registerAllSquareEndPositions);
 
-var _movePartToBottom = __webpack_require__(8);
+var _movePartToBottom = __webpack_require__(9);
 
 var _movePartToBottom2 = _interopRequireDefault(_movePartToBottom);
 
-var _movePartToRight = __webpack_require__(10);
+var _movePartToRight = __webpack_require__(11);
 
 var _movePartToRight2 = _interopRequireDefault(_movePartToRight);
 
-var _movePartToLeft = __webpack_require__(9);
+var _movePartToLeft = __webpack_require__(10);
 
 var _movePartToLeft2 = _interopRequireDefault(_movePartToLeft);
 
@@ -1109,7 +1154,7 @@ var _collisionWithCavasBottom = __webpack_require__(4);
 
 var _collisionWithCavasBottom2 = _interopRequireDefault(_collisionWithCavasBottom);
 
-var _scorePoints = __webpack_require__(11);
+var _scorePoints = __webpack_require__(12);
 
 var _scorePoints2 = _interopRequireDefault(_scorePoints);
 
@@ -1121,7 +1166,7 @@ var _reset = __webpack_require__(7);
 
 var _reset2 = _interopRequireDefault(_reset);
 
-var _sound = __webpack_require__(25);
+var _sound = __webpack_require__(8);
 
 var _sound2 = _interopRequireDefault(_sound);
 
@@ -1232,43 +1277,6 @@ function tetrisInit() {
     } // End Play validation
   }, states.movementSpeed); // End down()
 } // End tetrisInit()
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var soundControlInit = function soundControlInit() {
-
-  var soundBtn = document.getElementById('soundBtn');
-  var backgroundSong = new Audio('./assets/sounds/original-tetris-soundtrack.mp3');
-
-  var isPlaying = false;
-
-  var toggleSound = function toggleSound() {
-
-    if (isPlaying) {
-
-      soundBtn.classList.remove('btn--on');
-      backgroundSong.pause();
-      isPlaying = false;
-    } else {
-
-      soundBtn.classList.add('btn--on');
-      backgroundSong.play();
-      isPlaying = true;
-    }
-  };
-
-  soundBtn.addEventListener('click', toggleSound);
-};
-
-exports.default = soundControlInit;
 
 /***/ })
 /******/ ]);

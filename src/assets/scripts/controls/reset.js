@@ -1,10 +1,18 @@
 const resetControlInit = () => {
 
-  const reset = document.getElementById('resetBtn');
-
-  reset.addEventListener('click', () => {
+  const reset = () => {
     location.reload();
-  });
+  }
+
+  const resetBtn = document.getElementById('resetBtn');
+  resetBtn.addEventListener('click', reset);
+
+  const resetControl = (e) => {
+    const pressEsc = e.which == 27 || e.keyCode == 27;
+    if (pressEsc) reset();
+  }
+
+  window.addEventListener('keydown', resetControl);
 
 }
 
