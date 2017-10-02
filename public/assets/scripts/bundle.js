@@ -1121,6 +1121,10 @@ var _reset = __webpack_require__(7);
 
 var _reset2 = _interopRequireDefault(_reset);
 
+var _sound = __webpack_require__(25);
+
+var _sound2 = _interopRequireDefault(_sound);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // ---------------------------------------
@@ -1139,10 +1143,18 @@ var states = {
   movementSpeed: 300
 
   // ---------------------------------------
-  // Start game
+  // Controls
   // ---------------------------------------
 
-};var tetrisInit = function tetrisInit() {
+};(0, _play2.default)(states, tetrisInit);
+(0, _reset2.default)();
+(0, _sound2.default)();
+
+// ---------------------------------------
+// Start game
+// ---------------------------------------
+
+function tetrisInit() {
 
   // ---------------------------------------
   // Add new random part
@@ -1219,14 +1231,44 @@ var states = {
       } // End collisions validation
     } // End Play validation
   }, states.movementSpeed); // End down()
-}; // End tetrisInit()
+} // End tetrisInit()
 
-// ---------------------------------------
-// Controls
-// ---------------------------------------
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
 
-(0, _play2.default)(states, tetrisInit);
-(0, _reset2.default)();
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var soundControlInit = function soundControlInit() {
+
+  var soundBtn = document.getElementById('soundBtn');
+  var backgroundSong = new Audio('./assets/sounds/original-tetris-soundtrack.mp3');
+
+  var isPlaying = false;
+
+  var toggleSound = function toggleSound() {
+
+    if (isPlaying) {
+
+      soundBtn.classList.remove('btn--on');
+      backgroundSong.pause();
+      isPlaying = false;
+    } else {
+
+      soundBtn.classList.add('btn--on');
+      backgroundSong.play();
+      isPlaying = true;
+    }
+  };
+
+  soundBtn.addEventListener('click', toggleSound);
+};
+
+exports.default = soundControlInit;
 
 /***/ })
 /******/ ]);

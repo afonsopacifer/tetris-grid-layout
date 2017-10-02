@@ -51,6 +51,18 @@ body {
   background-repeat: no-repeat;
 }
 
+.btn--off {
+  background-image: url('../icons/sound-off.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.btn--on {
+  background-image: url('../icons/sound-on.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .game {
   display: flex;
   justify-content: center;

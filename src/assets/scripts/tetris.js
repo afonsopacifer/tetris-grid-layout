@@ -9,6 +9,7 @@ import collisionWithCavasBottom from './collisions/collisionWithCavasBottom';
 import scorePoints from './scorePoints';
 import playControlInit from './controls/play';
 import resetControlInit from './controls/reset';
+import soundControlInit from  './controls/sound';
 
 // ---------------------------------------
 // DOM elements
@@ -27,10 +28,18 @@ const states = {
 }
 
 // ---------------------------------------
+// Controls
+// ---------------------------------------
+
+playControlInit(states, tetrisInit);
+resetControlInit();
+soundControlInit();
+
+// ---------------------------------------
 // Start game
 // ---------------------------------------
 
-const tetrisInit = () => {
+function tetrisInit() {
 
   // ---------------------------------------
   // Add new random part
@@ -114,10 +123,3 @@ const tetrisInit = () => {
   }, states.movementSpeed); // End down()
 
 } // End tetrisInit()
-
-// ---------------------------------------
-// Controls
-// ---------------------------------------
-
-playControlInit(states, tetrisInit);
-resetControlInit();
