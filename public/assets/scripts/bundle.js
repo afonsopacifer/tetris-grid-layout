@@ -702,7 +702,7 @@ var newRandomPart = function newRandomPart() {
 
   var randomIndex = Math.floor(Math.random() * 7);
 
-  return allPossibleParts[randomIndex]();
+  return allPossibleParts[randomIndex];
 };
 
 exports.default = newRandomPart;
@@ -930,42 +930,38 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var iPart = function iPart() {
+var iPart = {
 
-  var square1 = (0, _newSquare2.default)({
+  type: 'i',
+
+  left: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 4,
     gridColumnEnd: 5
-  }, 'i');
+  }, 'i'),
 
-  var square2 = (0, _newSquare2.default)({
+  top: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'i');
+  }, 'i'),
 
-  var square3 = (0, _newSquare2.default)({
+  bottom: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'i');
+  }, 'i'),
 
-  var square4 = (0, _newSquare2.default)({
+  right: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 7,
     gridColumnEnd: 8
-  }, 'i');
+  }, 'i')
 
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
 };
 
 exports.default = iPart;
@@ -987,42 +983,38 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var jPart = function jPart() {
+var jPart = {
 
-  var square1 = (0, _newSquare2.default)({
+  type: 'j',
+
+  top: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'j');
+  }, 'j'),
 
-  var square2 = (0, _newSquare2.default)({
+  right: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'j');
+  }, 'j'),
 
-  var square3 = (0, _newSquare2.default)({
+  bottom: (0, _newSquare2.default)({
     gridRowStart: 3,
     gridRowEnd: 4,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'j');
+  }, 'j'),
 
-  var square4 = (0, _newSquare2.default)({
+  left: (0, _newSquare2.default)({
     gridRowStart: 3,
     gridRowEnd: 4,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'j');
+  }, 'j')
 
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
 };
 
 exports.default = jPart;
@@ -1044,42 +1036,38 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var lPart = function lPart() {
+var lPart = {
 
-  var square1 = (0, _newSquare2.default)({
+  type: 'l',
+
+  top: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'l');
+  }, 'l'),
 
-  var square2 = (0, _newSquare2.default)({
+  left: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'l');
+  }, 'l'),
 
-  var square3 = (0, _newSquare2.default)({
+  bottom: (0, _newSquare2.default)({
     gridRowStart: 3,
     gridRowEnd: 4,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'l');
+  }, 'l'),
 
-  var square4 = (0, _newSquare2.default)({
+  right: (0, _newSquare2.default)({
     gridRowStart: 3,
     gridRowEnd: 4,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'l');
+  }, 'l')
 
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
 };
 
 exports.default = lPart;
@@ -1101,42 +1089,38 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var oPart = function oPart() {
+var oPart = {
 
-  var square1 = (0, _newSquare2.default)({
+  type: 'o',
+
+  top: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'o');
+  }, 'o'),
 
-  var square2 = (0, _newSquare2.default)({
+  right: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'o');
+  }, 'o'),
 
-  var square3 = (0, _newSquare2.default)({
+  bottom: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'o');
+  }, 'o'),
 
-  var square4 = (0, _newSquare2.default)({
+  left: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'o');
+  }, 'o')
 
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
 };
 
 exports.default = oPart;
@@ -1158,42 +1142,38 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var sPart = function sPart() {
+var sPart = {
 
-  var square1 = (0, _newSquare2.default)({
+  type: 's',
+
+  top: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 's');
+  }, 's'),
 
-  var square2 = (0, _newSquare2.default)({
+  right: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 7,
     gridColumnEnd: 8
-  }, 's');
+  }, 's'),
 
-  var square3 = (0, _newSquare2.default)({
+  left: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 's');
+  }, 's'),
 
-  var square4 = (0, _newSquare2.default)({
+  bottom: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 's');
+  }, 's')
 
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
 };
 
 exports.default = sPart;
@@ -1215,42 +1195,38 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var tPart = function tPart() {
+var tPart = {
 
-  var square1 = (0, _newSquare2.default)({
+  type: 't',
+
+  left: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 't');
+  }, 't'),
 
-  var square2 = (0, _newSquare2.default)({
+  top: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 't');
+  }, 't'),
 
-  var square3 = (0, _newSquare2.default)({
+  bottom: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 't');
+  }, 't'),
 
-  var square4 = (0, _newSquare2.default)({
+  right: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 7,
     gridColumnEnd: 8
-  }, 't');
+  }, 't')
 
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
 };
 
 exports.default = tPart;
@@ -1272,42 +1248,38 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var zPart = function zPart() {
+var zPart = {
 
-  var square1 = (0, _newSquare2.default)({
+  type: 'z',
+
+  left: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'z');
+  }, 'z'),
 
-  var square2 = (0, _newSquare2.default)({
+  top: (0, _newSquare2.default)({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'z');
+  }, 'z'),
 
-  var square3 = (0, _newSquare2.default)({
+  bottom: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'z');
+  }, 'z'),
 
-  var square4 = (0, _newSquare2.default)({
+  right: (0, _newSquare2.default)({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 7,
     gridColumnEnd: 8
-  }, 'z');
+  }, 'z')
 
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  };
 };
 
 exports.default = zPart;

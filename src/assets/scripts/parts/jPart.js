@@ -1,41 +1,36 @@
 import newSquare from './../utils/squares/newSquare';
 
-const jPart = () => {
+const jPart = {
 
-  const square1 = newSquare({
+  type: 'j',
+
+  top: newSquare({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'j');
+  }, 'j'),
 
-  const square2 = newSquare({
+  right: newSquare({
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'j');
+  }, 'j'),
 
-  const square3 = newSquare({
+  bottom: newSquare({
     gridRowStart: 3,
     gridRowEnd: 4,
     gridColumnStart: 6,
     gridColumnEnd: 7
-  }, 'j');
+  }, 'j'),
 
-  const square4 = newSquare({
+  left: newSquare({
     gridRowStart: 3,
     gridRowEnd: 4,
     gridColumnStart: 5,
     gridColumnEnd: 6
-  }, 'j');
-
-  return {
-    left: square1,
-    top: square2,
-    bottom: square3,
-    right: square4
-  }
+  }, 'j')
 
 };
 
