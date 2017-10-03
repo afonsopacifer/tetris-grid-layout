@@ -702,7 +702,7 @@ var newRandomPart = function newRandomPart() {
 
   var randomIndex = Math.floor(Math.random() * 7);
 
-  return allPossibleParts[randomIndex];
+  return allPossibleParts[randomIndex]();
 };
 
 exports.default = newRandomPart;
@@ -930,38 +930,41 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var iPart = {
+var iPart = function iPart() {
 
-  type: 'i',
+  return {
 
-  left: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 4,
-    gridColumnEnd: 5
-  }, 'i'),
+    type: 'i',
 
-  top: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'i'),
+    left: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 4,
+      gridColumnEnd: 5
+    }, 'i'),
 
-  bottom: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'i'),
+    top: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 'i'),
 
-  right: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 7,
-    gridColumnEnd: 8
-  }, 'i')
+    bottom: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'i'),
 
+    right: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 7,
+      gridColumnEnd: 8
+    }, 'i')
+
+  };
 };
 
 exports.default = iPart;
@@ -983,38 +986,41 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var jPart = {
+var jPart = function jPart() {
 
-  type: 'j',
+  return {
 
-  top: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'j'),
+    type: 'j',
 
-  right: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'j'),
+    top: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'j'),
 
-  bottom: (0, _newSquare2.default)({
-    gridRowStart: 3,
-    gridRowEnd: 4,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'j'),
+    right: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'j'),
 
-  left: (0, _newSquare2.default)({
-    gridRowStart: 3,
-    gridRowEnd: 4,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'j')
+    bottom: (0, _newSquare2.default)({
+      gridRowStart: 3,
+      gridRowEnd: 4,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'j'),
 
+    left: (0, _newSquare2.default)({
+      gridRowStart: 3,
+      gridRowEnd: 4,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 'j')
+
+  };
 };
 
 exports.default = jPart;
@@ -1036,38 +1042,41 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var lPart = {
+var lPart = function lPart() {
 
-  type: 'l',
+  return {
 
-  top: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'l'),
+    type: 'l',
 
-  left: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'l'),
+    top: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 'l'),
 
-  bottom: (0, _newSquare2.default)({
-    gridRowStart: 3,
-    gridRowEnd: 4,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'l'),
+    left: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 'l'),
 
-  right: (0, _newSquare2.default)({
-    gridRowStart: 3,
-    gridRowEnd: 4,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'l')
+    bottom: (0, _newSquare2.default)({
+      gridRowStart: 3,
+      gridRowEnd: 4,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 'l'),
 
+    right: (0, _newSquare2.default)({
+      gridRowStart: 3,
+      gridRowEnd: 4,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'l')
+
+  };
 };
 
 exports.default = lPart;
@@ -1089,38 +1098,41 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var oPart = {
+var oPart = function oPart() {
 
-  type: 'o',
+  return {
 
-  top: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'o'),
+    type: 'o',
 
-  right: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'o'),
+    top: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 'o'),
 
-  bottom: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'o'),
+    right: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'o'),
 
-  left: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'o')
+    bottom: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'o'),
 
+    left: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 'o')
+
+  };
 };
 
 exports.default = oPart;
@@ -1142,38 +1154,41 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var sPart = {
+var sPart = function sPart() {
 
-  type: 's',
+  return {
 
-  top: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 's'),
+    type: 's',
 
-  right: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 7,
-    gridColumnEnd: 8
-  }, 's'),
+    top: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 's'),
 
-  left: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 's'),
+    right: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 7,
+      gridColumnEnd: 8
+    }, 's'),
 
-  bottom: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 's')
+    left: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 's'),
 
+    bottom: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 's')
+
+  };
 };
 
 exports.default = sPart;
@@ -1195,38 +1210,41 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var tPart = {
+var tPart = function tPart() {
 
-  type: 't',
+  return {
 
-  left: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 't'),
+    type: 't',
 
-  top: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 't'),
+    left: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 't'),
 
-  bottom: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 't'),
+    top: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 't'),
 
-  right: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 7,
-    gridColumnEnd: 8
-  }, 't')
+    bottom: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 't'),
 
+    right: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 7,
+      gridColumnEnd: 8
+    }, 't')
+
+  };
 };
 
 exports.default = tPart;
@@ -1248,38 +1266,41 @@ var _newSquare2 = _interopRequireDefault(_newSquare);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var zPart = {
+var zPart = function zPart() {
 
-  type: 'z',
+  return {
 
-  left: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 'z'),
+    type: 'z',
 
-  top: (0, _newSquare2.default)({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'z'),
+    left: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 'z'),
 
-  bottom: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 'z'),
+    top: (0, _newSquare2.default)({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'z'),
 
-  right: (0, _newSquare2.default)({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 7,
-    gridColumnEnd: 8
-  }, 'z')
+    bottom: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 'z'),
 
+    right: (0, _newSquare2.default)({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 7,
+      gridColumnEnd: 8
+    }, 'z')
+
+  };
 };
 
 exports.default = zPart;

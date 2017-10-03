@@ -1,36 +1,40 @@
 import newSquare from './../utils/squares/newSquare';
 
-const sPart = {
+const sPart = () => {
 
-  type: 's',
+  return {
 
-  top: newSquare({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 's'),
+    type: 's',
 
-  right: newSquare({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumnStart: 7,
-    gridColumnEnd: 8
-  }, 's'),
+    top: newSquare({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 's'),
 
-  left: newSquare({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 5,
-    gridColumnEnd: 6
-  }, 's'),
+    right: newSquare({
+      gridRowStart: 1,
+      gridRowEnd: 2,
+      gridColumnStart: 7,
+      gridColumnEnd: 8
+    }, 's'),
 
-  bottom: newSquare({
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    gridColumnStart: 6,
-    gridColumnEnd: 7
-  }, 's')
+    left: newSquare({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 5,
+      gridColumnEnd: 6
+    }, 's'),
+
+    bottom: newSquare({
+      gridRowStart: 2,
+      gridRowEnd: 3,
+      gridColumnStart: 6,
+      gridColumnEnd: 7
+    }, 's')
+
+  }
 
 };
 
