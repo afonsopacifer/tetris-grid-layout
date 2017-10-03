@@ -60,8 +60,8 @@ function tetrisInit() {
     const pressRight = e.which == 39 || e.keyCode == 39;
     const pressLeft = e.which == 37 || e.keyCode == 37;
 
-    if (pressRight) movePartToRight(part);
-    if (pressLeft) movePartToLeft(part);
+    if (pressRight) movePartToRight(part, states.allSquareEndPosition);
+    if (pressLeft) movePartToLeft(part, states.allSquareEndPosition);
 
   }
 
